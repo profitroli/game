@@ -36,6 +36,13 @@ public class LecturesController : MonoBehaviour
             contentPanel.SetActive(false);
     }
 
+    // Метод для перехода на сцену подготовки
+    public void LoadLecture()
+    {
+        // Убедитесь, что сцена "PreparationScene" добавлена в Build Settings
+        SceneManager.LoadScene("Lecture");
+    }
+
     void ReturnToMainMenu()
     {
         // Возврат в главное меню без затемнения
