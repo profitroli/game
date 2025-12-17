@@ -23,6 +23,11 @@ public class MainMenuController : MonoBehaviour
 
     private const string BLACK_SCREEN_NAME = "IntroBlackScreen";
 
+    public void LoadSettingsScene()
+    {
+        SceneManager.LoadScene("SettingsScene");
+    }
+
     private void Start()
     {
         InitializeButtons();
