@@ -7,8 +7,9 @@ public class GamesSceneController : MonoBehaviour
     [Header("Кнопки игр")]
     [SerializeField] private Button[] gameButtons;
 
-    [Header("Кнопка назад")]
+    [Header("Навигационные кнопки")]
     [SerializeField] private Button backButton;
+    [SerializeField] private Button okrPreparationButton; // Новая кнопка для перехода к ОКР
 
     [Header("Описание игр")]
     [SerializeField]
@@ -20,8 +21,9 @@ public class GamesSceneController : MonoBehaviour
         "пример"
     };
 
-    [Header("Настройки")]
-    [SerializeField] private string mainMenuSceneName = "MenuScene"; // Убедитесь, что название совпадает с вашей сценой меню
+    [Header("Настройки сцен")]
+    [SerializeField] private string mainMenuName = "MainMenu";
+    [SerializeField] private string okrPreparationSceneName = "PreparationScene"; // Название сцены подготовки к ОКР
 
     private GameObject currentMessage; // Для отслеживания текущего сообщения
 
@@ -41,18 +43,44 @@ public class GamesSceneController : MonoBehaviour
             }
         }
 
-        // Кнопка назад возвращает в главное меню БЕЗ затемнения
+        // Кнопка назад возвращает в главное меню
         if (backButton != null)
         {
             backButton.onClick.AddListener(ReturnToMainMenu);
+        }
+
+        // Настройка кнопки перехода к подготовке ОКР
+        if (okrPreparationButton != null)
+        {
+            // Добавляем обработчик клика
+            okrPreparationButton.onClick.AddListener(GoToOKRPreparation);
+        }
+        else
+        {
+            Debug.LogWarning("Кнопка перехода к ОКР не назначена в инспекторе!");
         }
     }
 
     void ReturnToMainMenu()
     {
         // Прямая загрузка сцены без эффектов затемнения
-        // Убедитесь, что название сцены совпадает с вашей сценой меню
-        SceneManager.LoadScene(mainMenuSceneName);
+        SceneManager.LoadScene(mainMenuName);
+    }
+
+    void GoToOKRPreparation()
+    {
+        Debug.Log($"Переход к подготовке ОКР: {okrPreparationSceneName}");
+
+        // Проверяем, существует ли сцена с таким именем
+        if (SceneExists(okrPreparationSceneName))
+        {
+            SceneManager.LoadScene(okrPreparationSceneName);
+        }
+        else
+        {
+            ShowErrorMessage($"Сцена '{okrPreparationSceneName}' не найдена!");
+            Debug.LogError($"Сцена '{okrPreparationSceneName}' не найдена. Проверьте название в Build Settings.");
+        }
     }
 
     void OnGameButtonClick(int gameIndex)
@@ -111,6 +139,74 @@ public class GamesSceneController : MonoBehaviour
 
         // Удаляем через 2 секунды
         Destroy(message, 2f);
+    }
+
+    void ShowErrorMessage(string errorMessage)
+    {
+        // Удаляем предыдущее сообщение, если оно есть
+        if (currentMessage != null)
+        {
+            Destroy(currentMessage);
+        }
+
+        // Создаем сообщение об ошибке
+        GameObject message = new GameObject("ErrorMessage");
+        currentMessage = message;
+
+        Canvas canvas = FindObjectOfType<Canvas>();
+        if (canvas != null)
+        {
+            message.transform.SetParent(canvas.transform);
+        }
+
+        // Позиционируем по центру
+        RectTransform rect = message.AddComponent<RectTransform>();
+        rect.anchoredPosition = Vector2.zero;
+        rect.sizeDelta = new Vector2(500, 250);
+
+        // Добавляем фон (красный для ошибки)
+        Image background = message.AddComponent<Image>();
+        background.color = new Color(0.8f, 0, 0, 0.9f);
+
+        // Добавляем текст
+        GameObject textObj = new GameObject("Text");
+        textObj.transform.SetParent(message.transform);
+
+        Text text = textObj.AddComponent<Text>();
+        text.text = errorMessage;
+        text.font = Resources.GetBuiltinResource<Font>("Arial.ttf");
+        text.fontSize = 20;
+        text.color = Color.white;
+        text.alignment = TextAnchor.MiddleCenter;
+        text.resizeTextForBestFit = true;
+        text.resizeTextMinSize = 10;
+        text.resizeTextMaxSize = 24;
+
+        // Растягиваем текст на всю панель
+        RectTransform textRect = textObj.GetComponent<RectTransform>();
+        textRect.anchorMin = Vector2.zero;
+        textRect.anchorMax = Vector2.one;
+        textRect.offsetMin = new Vector2(10, 10);
+        textRect.offsetMax = new Vector2(-10, -10);
+
+        // Удаляем через 3 секунды
+        Destroy(message, 3f);
+    }
+
+    bool SceneExists(string sceneName)
+    {
+        // Проверяем, существует ли сцена в Build Settings
+        for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
+        {
+            string scenePath = SceneUtility.GetScenePathByBuildIndex(i);
+            string sceneNameInBuild = System.IO.Path.GetFileNameWithoutExtension(scenePath);
+
+            if (sceneNameInBuild == sceneName)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     void OnDestroy()

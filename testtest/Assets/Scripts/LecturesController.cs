@@ -7,6 +7,7 @@ public class LecturesController : MonoBehaviour
     [Header("Кнопки")]
     public Button backButton;
     public Button[] lectureButtons;
+    public Button miniGamesButton; // Новая кнопка для мини-игр
 
     [Header("UI элементы")]
     public Text lectureTitle;
@@ -18,6 +19,10 @@ public class LecturesController : MonoBehaviour
         // Назначаем кнопку возврата
         if (backButton != null)
             backButton.onClick.AddListener(ReturnToMainMenu);
+
+        // Назначаем кнопку мини-игр
+        if (miniGamesButton != null)
+            miniGamesButton.onClick.AddListener(GoToMiniGames);
 
         // Назначаем кнопки лекций
         for (int i = 0; i < lectureButtons.Length; i++)
@@ -35,6 +40,13 @@ public class LecturesController : MonoBehaviour
     {
         // Возврат в главное меню без затемнения
         SceneManager.LoadScene("MainMenu");
+    }
+
+    void GoToMiniGames()
+    {
+        // Переход в сцену мини-игр
+        // Убедитесь, что у вас есть сцена с именем "MiniGames" в Build Settings
+        SceneManager.LoadScene("GamesScene");
     }
 
     void ShowLecture(int lectureIndex)

@@ -25,6 +25,7 @@ public class IntroVideoController : MonoBehaviour
 
     private bool isVideoFinished = false;
     private float timer = 0f;
+    private bool isVideoPrepared = false;
 
     void Start()
     {
@@ -87,12 +88,23 @@ public class IntroVideoController : MonoBehaviour
         // Настройка кнопки пропуска
         if (skipButton != null)
         {
+            skipButton.onClick.RemoveAllListeners(); // Очищаем старые события
             skipButton.onClick.AddListener(SkipVideo);
 
             // Скрываем кнопку на время задержки
             if (skipButtonObject != null)
             {
                 skipButtonObject.SetActive(false);
+            }
+        }
+        else if (skipButtonObject != null)
+        {
+            // Если кнопка не назначена, но есть объект кнопки, пытаемся найти компонент Button
+            skipButton = skipButtonObject.GetComponent<Button>();
+            if (skipButton != null)
+            {
+                skipButton.onClick.RemoveAllListeners();
+                skipButton.onClick.AddListener(SkipVideo);
             }
         }
 
@@ -126,7 +138,7 @@ public class IntroVideoController : MonoBehaviour
     void Update()
     {
         // Таймер для активации кнопки пропуска
-        if (!skipButtonObject.activeSelf && allowSkip)
+        if (skipButtonObject != null && !skipButtonObject.activeSelf && allowSkip && isVideoPrepared)
         {
             timer += Time.deltaTime;
             if (timer >= skipDelay)
@@ -137,7 +149,7 @@ public class IntroVideoController : MonoBehaviour
         }
 
         // Пропуск по любой клавише (после задержки)
-        if (Input.anyKeyDown && allowSkip && timer >= skipDelay && !isVideoFinished)
+        if (Input.anyKeyDown && allowSkip && timer >= skipDelay && !isVideoFinished && isVideoPrepared)
         {
             Debug.Log("Пропуск по клавише");
             SkipVideo();
@@ -177,6 +189,14 @@ public class IntroVideoController : MonoBehaviour
         if (loadingText != null)
             loadingText.gameObject.SetActive(false);
 
+        // Активируем RawImage для отображения видео
+        if (videoDisplay != null)
+        {
+            videoDisplay.texture = videoPlayer.texture;
+            videoDisplay.gameObject.SetActive(true);
+        }
+
+        isVideoPrepared = true;
         videoPlayer.Play();
     }
 
@@ -189,6 +209,8 @@ public class IntroVideoController : MonoBehaviour
             loadingText.text = "";
             loadingText.gameObject.SetActive(false);
         }
+
+        isVideoPrepared = true;
     }
 
     void OnVideoStarted(VideoPlayer vp)
@@ -205,7 +227,7 @@ public class IntroVideoController : MonoBehaviour
         LoadMainMenu();
     }
 
-    void SkipVideo()
+    public void SkipVideo()
     {
         if (!isVideoFinished && allowSkip)
         {
@@ -273,6 +295,12 @@ public class IntroVideoController : MonoBehaviour
             videoPlayer.loopPointReached -= OnVideoFinished;
             videoPlayer.prepareCompleted -= OnVideoPrepared;
             videoPlayer.started -= OnVideoStarted;
+        }
+
+        // Очищаем события кнопки
+        if (skipButton != null)
+        {
+            skipButton.onClick.RemoveListener(SkipVideo);
         }
 
         Debug.Log("IntroVideoController уничтожен");
