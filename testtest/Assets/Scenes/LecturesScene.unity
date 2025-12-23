@@ -276,7 +276,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 118411498}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1895934161}
+        m_TargetAssemblyTypeName: LecturesController, Assembly-CSharp
+        m_MethodName: LoadLecture14
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &118411498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1418,7 +1430,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 654245141}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1895934161}
+        m_TargetAssemblyTypeName: LecturesController, Assembly-CSharp
+        m_MethodName: LoadLecture8
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &654245141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1539,7 +1563,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 664030852}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1895934161}
+        m_TargetAssemblyTypeName: LecturesController, Assembly-CSharp
+        m_MethodName: LoadLecture11
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &664030852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1810,7 +1846,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 743435683}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1895934161}
+        m_TargetAssemblyTypeName: LecturesController, Assembly-CSharp
+        m_MethodName: LoadLecture6
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &743435683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1931,7 +1979,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 746359240}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1895934161}
+        m_TargetAssemblyTypeName: LecturesController, Assembly-CSharp
+        m_MethodName: LoadLecture4
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &746359240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2405,7 +2465,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 907543757}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1895934161}
+        m_TargetAssemblyTypeName: LecturesController, Assembly-CSharp
+        m_MethodName: LoadLecture13
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &907543757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3098,7 +3170,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u041B\u0435\u043A\u0446\u0438\u044F 1.3. \u0412\u0435\u043B\u0438\u043A\u043E\u0435
+  m_text: "\u041B\u0435\u043A\u0446\u0438\u044F 3. \u0412\u0435\u043B\u0438\u043A\u043E\u0435
     \u043A\u043D\u044F\u0436\u0435\u0441\u0442\u0432\u043E \u041B\u0438\u0442\u043E\u0432\u0441\u043A\u043E\u0435"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3339,7 +3411,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1895934161}
         m_TargetAssemblyTypeName: LecturesController, Assembly-CSharp
-        m_MethodName: LoadLecture
+        m_MethodName: LoadLecture1
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3590,7 +3662,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1152519798}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1895934161}
+        m_TargetAssemblyTypeName: LecturesController, Assembly-CSharp
+        m_MethodName: LoadLecture2
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1152519798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3850,7 +3934,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1329337192}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1895934161}
+        m_TargetAssemblyTypeName: LecturesController, Assembly-CSharp
+        m_MethodName: LoadLecture7
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1329337192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4187,7 +4283,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1374878057}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1895934161}
+        m_TargetAssemblyTypeName: LecturesController, Assembly-CSharp
+        m_MethodName: LoadLecture10
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1374878057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4308,7 +4416,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1413092379}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1895934161}
+        m_TargetAssemblyTypeName: LecturesController, Assembly-CSharp
+        m_MethodName: LoadLecture3
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1413092379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5058,7 +5178,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1648076174}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1895934161}
+        m_TargetAssemblyTypeName: LecturesController, Assembly-CSharp
+        m_MethodName: LoadLecture5
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1648076174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5179,7 +5311,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1667670692}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1895934161}
+        m_TargetAssemblyTypeName: LecturesController, Assembly-CSharp
+        m_MethodName: LoadLecture11
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1667670692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5300,7 +5444,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1682885793}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1895934161}
+        m_TargetAssemblyTypeName: LecturesController, Assembly-CSharp
+        m_MethodName: LoadLecture9
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1682885793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5983,8 +6139,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 253.38998}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -1.6700001, y: 255.17001}
+  m_SizeDelta: {x: 229.9136, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1859737336
 MonoBehaviour:
@@ -6006,7 +6162,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u041B\u0435\u043A\u0446\u0438\u0438\u0438"
+  m_text: "\u041B\u0435\u043A\u0446\u0438\u0438"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6072,7 +6228,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -54.16983, y: 0, z: -39.186523, w: 0}
+  m_margin: {x: -1.245697, y: 0, z: 0.6984253, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

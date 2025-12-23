@@ -106,6 +106,12 @@ public class IntroVideoController : MonoBehaviour
                 skipButton.onClick.RemoveAllListeners();
                 skipButton.onClick.AddListener(SkipVideo);
             }
+            else
+            {
+                // Если компонент Button отсутствует, добавляем его
+                skipButton = skipButtonObject.AddComponent<Button>();
+                skipButton.onClick.AddListener(SkipVideo);
+            }
         }
 
         // Показываем текст загрузки

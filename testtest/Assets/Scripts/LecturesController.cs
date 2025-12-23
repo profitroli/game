@@ -37,10 +37,90 @@ public class LecturesController : MonoBehaviour
     }
 
     // Метод для перехода на сцену подготовки
-    public void LoadLecture()
+    public void LoadLecture1()
     {
         // Убедитесь, что сцена "PreparationScene" добавлена в Build Settings
-        SceneManager.LoadScene("Lecture");
+        SceneManager.LoadScene("Lecture 1");
+    }
+
+    // Метод для перехода на сцену подготовки
+    public void LoadLecture2()
+    {
+        // Убедитесь, что сцена "PreparationScene" добавлена в Build Settings
+        SceneManager.LoadScene("Lecture 2");
+    }
+
+    // Метод для перехода на сцену подготовки
+    public void LoadLecture3()
+    {
+        // Убедитесь, что сцена "PreparationScene" добавлена в Build Settings
+        SceneManager.LoadScene("Lecture 3");
+    }
+
+    // Метод для перехода на сцену подготовки
+    public void LoadLecture4()
+    {
+        // Убедитесь, что сцена "PreparationScene" добавлена в Build Settings
+        SceneManager.LoadScene("Lecture 4");
+    }
+
+    // Метод для перехода на сцену подготовки
+    public void LoadLecture5()
+    {
+        // Убедитесь, что сцена "PreparationScene" добавлена в Build Settings
+        SceneManager.LoadScene("Lecture 5");
+    }
+
+    // Метод для перехода на сцену подготовки
+    public void LoadLecture6()
+    {
+        // Убедитесь, что сцена "PreparationScene" добавлена в Build Settings
+        SceneManager.LoadScene("Lecture 6");
+    }
+
+    // Метод для перехода на сцену подготовки
+    public void LoadLecture7()
+    {
+        // Убедитесь, что сцена "PreparationScene" добавлена в Build Settings
+        SceneManager.LoadScene("Lecture 7");
+    }
+
+    // Метод для перехода на сцену подготовки
+    public void LoadLecture8()
+    {
+        // Убедитесь, что сцена "PreparationScene" добавлена в Build Settings
+        SceneManager.LoadScene("Lecture 8");
+    }
+
+    // Метод для перехода на сцену подготовки
+    public void LoadLecture9()
+    {
+        // Убедитесь, что сцена "PreparationScene" добавлена в Build Settings
+        SceneManager.LoadScene("Lecture 9");
+    }
+
+    public void LoadLecture10()
+    {
+        // Убедитесь, что сцена "PreparationScene" добавлена в Build Settings
+        SceneManager.LoadScene("Lecture 10");
+    }
+
+    public void LoadLecture11()
+    {
+        // Убедитесь, что сцена "PreparationScene" добавлена в Build Settings
+        SceneManager.LoadScene("Lecture 11-12");
+    }
+
+    public void LoadLecture13()
+    {
+        // Убедитесь, что сцена "PreparationScene" добавлена в Build Settings
+        SceneManager.LoadScene("Lecture 13");
+    }
+
+    public void LoadLecture14()
+    {
+        // Убедитесь, что сцена "PreparationScene" добавлена в Build Settings
+        SceneManager.LoadScene("Lecture 14");
     }
 
     void ReturnToMainMenu()

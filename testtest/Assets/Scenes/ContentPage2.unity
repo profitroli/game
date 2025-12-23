@@ -477,7 +477,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 102237251}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1160315352}
+        m_TargetAssemblyTypeName: Page2NavigationManager, Assembly-CSharp
+        m_MethodName: LoadTest10
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &102237251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1369,7 +1381,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 426147197}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1160315352}
+        m_TargetAssemblyTypeName: Page2NavigationManager, Assembly-CSharp
+        m_MethodName: LoadTest1
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &426147197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1705,7 +1729,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 525083996}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1160315352}
+        m_TargetAssemblyTypeName: Page2NavigationManager, Assembly-CSharp
+        m_MethodName: LoadTest9
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &525083996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1826,7 +1862,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 667896745}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1160315352}
+        m_TargetAssemblyTypeName: Page2NavigationManager, Assembly-CSharp
+        m_MethodName: LoadTest2
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &667896745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1947,7 +1995,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 734086026}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1160315352}
+        m_TargetAssemblyTypeName: Page2NavigationManager, Assembly-CSharp
+        m_MethodName: LoadTest4
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &734086026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2068,7 +2128,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 806077719}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1160315352}
+        m_TargetAssemblyTypeName: Page2NavigationManager, Assembly-CSharp
+        m_MethodName: LoadTest12
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &806077719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2467,7 +2539,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 870093629}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1160315352}
+        m_TargetAssemblyTypeName: Page2NavigationManager, Assembly-CSharp
+        m_MethodName: LoadTest6
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &870093629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2588,7 +2672,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 870712768}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1160315352}
+        m_TargetAssemblyTypeName: Page2NavigationManager, Assembly-CSharp
+        m_MethodName: LoadTest14
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &870712768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2882,7 +2978,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1134912744}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1160315352}
+        m_TargetAssemblyTypeName: Page2NavigationManager, Assembly-CSharp
+        m_MethodName: LoadTest5
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1134912744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3142,7 +3250,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1150527507}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1160315352}
+        m_TargetAssemblyTypeName: Page2NavigationManager, Assembly-CSharp
+        m_MethodName: LoadTest11
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1150527507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3947,7 +4067,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1556275497}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1160315352}
+        m_TargetAssemblyTypeName: Page2NavigationManager, Assembly-CSharp
+        m_MethodName: LoadTest7
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1556275497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4298,7 +4430,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1624611595}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1160315352}
+        m_TargetAssemblyTypeName: Page2NavigationManager, Assembly-CSharp
+        m_MethodName: LoadTest3
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1624611595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4797,7 +4941,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1809667619}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1160315352}
+        m_TargetAssemblyTypeName: Page2NavigationManager, Assembly-CSharp
+        m_MethodName: LoadTest8
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1809667619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5331,7 +5487,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2143718640}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1160315352}
+        m_TargetAssemblyTypeName: Page2NavigationManager, Assembly-CSharp
+        m_MethodName: LoadTest13
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2143718640
 MonoBehaviour:
   m_ObjectHideFlags: 0
