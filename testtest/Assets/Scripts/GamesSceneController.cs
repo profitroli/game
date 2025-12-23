@@ -60,7 +60,10 @@ public class GamesSceneController : MonoBehaviour
             Debug.LogWarning("Кнопка перехода к ОКР не назначена в инспекторе!");
         }
     }
-
+    public void LoadLevelByName(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
     void ReturnToMainMenu()
     {
         // Прямая загрузка сцены без эффектов затемнения
