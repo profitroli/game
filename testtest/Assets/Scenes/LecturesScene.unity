@@ -2784,7 +2784,7 @@ MonoBehaviour:
   scrollSpeed: 20
   minYPosition: -1000
   maxYPosition: 700
-  invertScrollDirection: 0
+  invertScrollDirection: 1
   showDebugBounds: 1
 --- !u!114 &992504348
 MonoBehaviour:
