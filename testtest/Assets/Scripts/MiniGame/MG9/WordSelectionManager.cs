@@ -38,34 +38,47 @@ public class WordSelectionManager : MonoBehaviour
 
     public void CheckResults()
     {
-        int correctMatches = 0;
+        int correctSelected = 0;
+        int totalRequired = 0;
         bool hasErrors = false;
 
         foreach (var w in words)
         {
-            // Проверяем: совпал ли выбор пользователя с исторической правдой
-            if (w.isSelected == w.isCorrectTarget)
+            if (w.isCorrectTarget) totalRequired++;
+
+            if (w.isSelected)
             {
-                correctMatches++;
-                // Если верно выбрано или верно пропущено - красим в зеленый
-                if (w.isSelected) w.wordButton.image.color = Color.green;
+                if (w.isCorrectTarget)
+                {
+                    // Правильно выбранный элемент
+                    w.wordButton.image.color = Color.green;
+                    correctSelected++;
+                }
+                else
+                {
+                    // Ошибочно выбранный элемент
+                    w.wordButton.image.color = Color.red;
+                    hasErrors = true;
+                }
             }
             else
             {
-                hasErrors = true;
-                // Если ошибка - красим в красный
-                w.wordButton.image.color = Color.red;
+                // Если кнопка НЕ выбрана, возвращаем ей белый цвет (или серый)
+                w.wordButton.image.color = Color.white;
+
+                // Если игрок ЗАБЫЛ выбрать нужную кнопку
+                if (w.isCorrectTarget) hasErrors = true;
             }
         }
 
-        if (!hasErrors && correctMatches == words.Count)
+        if (!hasErrors && correctSelected == totalRequired)
         {
             statusText.text = "Верно! ВКЛ сохранило автономию, но монарх и сейм стали общими.";
             statusText.color = Color.green;
         }
         else
         {
-            statusText.text = "Есть ошибки. Вспомните условия Люблинской унии!";
+            statusText.text = "Есть ошибки или пропущенные элементы!";
             statusText.color = Color.red;
         }
     }

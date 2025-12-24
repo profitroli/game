@@ -1,11 +1,10 @@
 fileFormatVersion: 2
-guid: 7046cfb6255bb984eb7e0290d3380cba
+guid: de22f6ade86e5d84dbefb1d5192d942e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 302638002996464162
-    second: "\u0421\u043D\u0438\u043C\u043E\u043A \u044D\u043A\u0440\u0430\u043D\u0430
-      2025-12-23 123309_0"
+      213: -6041496727463865553
+    second: kalinouski1_0_1-xegud.jpg_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -101,14 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\u0421\u043D\u0438\u043C\u043E\u043A \u044D\u043A\u0440\u0430\u043D\u0430
-        2025-12-23 123309_0"
+      name: kalinouski1_0_1-xegud.jpg_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 921
-        height: 396
+        width: 732
+        height: 568
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -117,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 22a432809af233400800000000000000
-      internalID: 302638002996464162
+      spriteID: f23d4df4cba482ca0800000000000000
+      internalID: -6041496727463865553
       vertices: []
       indices: 
       edges: []
@@ -137,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      "\u0421\u043D\u0438\u043C\u043E\u043A \u044D\u043A\u0440\u0430\u043D\u0430 2025-12-23 123309_0": 302638002996464162
+      kalinouski1_0_1-xegud.jpg_0: -6041496727463865553
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

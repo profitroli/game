@@ -201,7 +201,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 85336418}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 360559012}
+        m_TargetAssemblyTypeName: GamesSceneController, Assembly-CSharp
+        m_MethodName: LoadLevelByName
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: MiniGame12
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &85336418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1418,7 +1430,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: "\u0412\u043E\u0441\u0441\u0442\u0430\u043D\u0438\u044F \u0438 \u0440\u0430\u0437\u0434\u0435\u043B\u044B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1445,8 +1457,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 19
+  m_fontSizeBase: 19
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2023,7 +2035,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: "\u041F\u0440\u043E\u0433\u0440\u0430\u043C\u043C\u0430 \u041D\u0430\u0448\u0430\u043D\u0438\u0432\u0446\u0435\u0432"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2050,8 +2062,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 19
+  m_fontSizeBase: 19
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -7453,7 +7465,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 984994880}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 360559012}
+        m_TargetAssemblyTypeName: GamesSceneController, Assembly-CSharp
+        m_MethodName: LoadLevelByName
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: MiniGame10
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &984994880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9549,7 +9573,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1194111163}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 360559012}
+        m_TargetAssemblyTypeName: GamesSceneController, Assembly-CSharp
+        m_MethodName: LoadLevelByName
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: MiniGame11
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1194111163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10525,7 +10561,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: "\u0418\u0434\u0435\u0439\u043D\u044B\u0435 \u0442\u0435\u0447\u0435\u043D\u0438\u044F
+    XIX \u0432\u0435\u043A\u0430"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -10552,8 +10589,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 19
+  m_fontSizeBase: 19
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
