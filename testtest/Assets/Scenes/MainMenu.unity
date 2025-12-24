@@ -619,15 +619,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuController
   fadeTime: 2
-  lecturesButton: {fileID: 0}
-  miniGamesButton: {fileID: 0}
-  preparationButton: {fileID: 0}
-  exitButton: {fileID: 0}
+  lecturesButton: {fileID: 1602213338}
+  miniGamesButton: {fileID: 444631060}
+  preparationButton: {fileID: 1768700683}
+  exitButton: {fileID: 858423292}
+  settingsButton: {fileID: 2066555203}
   menuCanvasGroup: {fileID: 0}
   lecturesSceneName: LecturesScene
   miniGamesSceneName: GamesScene
   preparationSceneName: PreparationScene
+  settingsSceneName: SettingsScene
   mainMenuSceneName: MainMenu
+  blackScreenImage: {fileID: 0}
+  blackScreenObject: {fileID: 0}
 --- !u!4 &667597085
 Transform:
   m_ObjectHideFlags: 0
@@ -1414,11 +1418,15 @@ MonoBehaviour:
   miniGamesButton: {fileID: 444631060}
   preparationButton: {fileID: 1768700683}
   exitButton: {fileID: 858423292}
+  settingsButton: {fileID: 0}
   menuCanvasGroup: {fileID: 0}
   lecturesSceneName: LecturesScene
   miniGamesSceneName: GamesScene
   preparationSceneName: PreparationScene
+  settingsSceneName: SettingsScene
   mainMenuSceneName: MainMenu
+  blackScreenImage: {fileID: 0}
+  blackScreenObject: {fileID: 0}
 --- !u!114 &1627954413
 MonoBehaviour:
   m_ObjectHideFlags: 0

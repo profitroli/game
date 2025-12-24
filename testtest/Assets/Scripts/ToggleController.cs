@@ -1,87 +1,176 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
-public class ToggleController : MonoBehaviour
+public class QuestionToggleController : MonoBehaviour
 {
-    [Header("Ссылки")]
-    public Toggle soundToggle;
-    public Toggle musicToggle;
-    public Toggle vibrationToggle;
+    [Header("Список вопросов")]
+    public Toggle[] questionToggles; // Используем массив вместо списка для простоты настройки в инспекторе
 
-    [Header("Настройки")]
-    public AudioSource backgroundMusic;
+    [Header("Настройки сохранения")]
+    public string saveKeyPrefix = "Question_";
+    public bool autoFindToggles = false; // Опция для автоматического поиска
 
     void Start()
     {
-        // Загружаем сохраненные значения (пример)
-        soundToggle.isOn = PlayerPrefs.GetInt("SoundEnabled", 1) == 1;
-        musicToggle.isOn = PlayerPrefs.GetInt("MusicEnabled", 1) == 1;
-        vibrationToggle.isOn = PlayerPrefs.GetInt("VibrationEnabled", 1) == 1;
+        InitializeToggles();
+        LoadToggleStates();
+        SetupToggleListeners();
 
-        // Подписываемся на события
-        soundToggle.onValueChanged.AddListener(OnSoundToggleChanged);
-        musicToggle.onValueChanged.AddListener(OnMusicToggleChanged);
-        vibrationToggle.onValueChanged.AddListener(OnVibrationToggleChanged);
-
-        // Применяем начальные настройки
-        ApplySoundSettings();
-        ApplyMusicSettings();
+        Debug.Log($"QuestionToggleController инициализирован. Найдено тогглов: {questionToggles.Length}");
     }
 
-    void OnSoundToggleChanged(bool isOn)
+    void InitializeToggles()
     {
-        Debug.Log($"Звук: {(isOn ? "ВКЛ" : "ВЫКЛ")}");
-        PlayerPrefs.SetInt("SoundEnabled", isOn ? 1 : 0);
-        ApplySoundSettings();
-    }
-
-    void OnMusicToggleChanged(bool isOn)
-    {
-        Debug.Log($"Музыка: {(isOn ? "ВКЛ" : "ВЫКЛ")}");
-        PlayerPrefs.SetInt("MusicEnabled", isOn ? 1 : 0);
-        ApplyMusicSettings();
-    }
-
-    void OnVibrationToggleChanged(bool isOn)
-    {
-        Debug.Log($"Вибрация: {(isOn ? "ВКЛ" : "ВЫКЛ")}");
-        PlayerPrefs.SetInt("VibrationEnabled", isOn ? 1 : 0);
-
-        // Пример для мобильных устройств
-#if UNITY_ANDROID || UNITY_IOS
-        if (isOn)
+        if (autoFindToggles)
         {
-            Handheld.Vibrate();
-        }
-#endif
-    }
+            // Автоматически находим все тогглы в сцене
+            Toggle[] allToggles = FindObjectsOfType<Toggle>(true); // true - ищем неактивные тоже
+            List<Toggle> questionToggleList = new List<Toggle>();
 
-    void ApplySoundSettings()
-    {
-        // Применяем настройки звука ко всем звуковым эффектам
-        AudioListener.volume = soundToggle.isOn ? 1f : 0f;
-    }
-
-    void ApplyMusicSettings()
-    {
-        if (backgroundMusic != null)
-        {
-            if (musicToggle.isOn && !backgroundMusic.isPlaying)
+            foreach (Toggle toggle in allToggles)
             {
-                backgroundMusic.Play();
+                // Ищем только тогглы, которые не системные
+                if (toggle.name.Contains("Question") ||
+                    toggle.name.Contains("Вопрос") ||
+                    toggle.gameObject.transform.parent != null &&
+                    (toggle.gameObject.transform.parent.name.Contains("Question") ||
+                     toggle.gameObject.transform.parent.name.Contains("Вопрос")))
+                {
+                    questionToggleList.Add(toggle);
+                    Debug.Log($"Найден тоггл вопроса: {toggle.name}");
+                }
             }
-            else if (!musicToggle.isOn && backgroundMusic.isPlaying)
+
+            questionToggles = questionToggleList.ToArray();
+        }
+
+        // Если все равно пусто, выводим предупреждение
+        if (questionToggles == null || questionToggles.Length == 0)
+        {
+            Debug.LogWarning("Не найдены тогглы вопросов! Проверьте настройки.");
+            questionToggles = new Toggle[0];
+        }
+    }
+
+    void LoadToggleStates()
+    {
+        for (int i = 0; i < questionToggles.Length; i++)
+        {
+            if (questionToggles[i] != null)
             {
-                backgroundMusic.Stop();
+                string key = saveKeyPrefix + i.ToString();
+                int savedValue = PlayerPrefs.GetInt(key, 0);
+                bool isOn = savedValue == 1;
+
+                // Важно: отключаем временно слушатель, чтобы не вызывать сохранение при загрузке
+                questionToggles[i].SetIsOnWithoutNotify(isOn);
+
+                // Обновляем визуал
+                UpdateToggleAppearance(questionToggles[i], isOn);
+
+                Debug.Log($"Загружен тоггл {i}: {isOn} (ключ: {key})");
             }
         }
+    }
+
+    void SetupToggleListeners()
+    {
+        for (int i = 0; i < questionToggles.Length; i++)
+        {
+            if (questionToggles[i] != null)
+            {
+                int index = i; // Локальная копия для замыкания
+
+                // Удаляем старые слушатели
+                questionToggles[i].onValueChanged.RemoveAllListeners();
+
+                // Добавляем новый слушатель
+                questionToggles[i].onValueChanged.AddListener((value) =>
+                {
+                    OnToggleValueChanged(index, value);
+                });
+            }
+        }
+    }
+
+    void OnToggleValueChanged(int index, bool value)
+    {
+        Debug.Log($"Тоггл {index} изменен на: {value}");
+
+        if (index >= 0 && index < questionToggles.Length && questionToggles[index] != null)
+        {
+            // Сохраняем
+            string key = saveKeyPrefix + index.ToString();
+            PlayerPrefs.SetInt(key, value ? 1 : 0);
+            PlayerPrefs.Save();
+
+            // Обновляем визуал
+            UpdateToggleAppearance(questionToggles[index], value);
+
+            Debug.Log($"Сохранено: {key} = {value}");
+        }
+    }
+
+    void UpdateToggleAppearance(Toggle toggle, bool isCompleted)
+    {
+        if (toggle == null) return;
+
+        // Меняем цвет текста, если есть Text компонент
+        Text label = toggle.GetComponentInChildren<Text>();
+        if (label != null)
+        {
+            label.color = isCompleted ? new Color(0.2f, 0.8f, 0.2f) : Color.white;
+        }
+
+        // Меняем цвет галочки
+        Image checkmark = toggle.graphic as Image;
+        if (checkmark != null)
+        {
+            checkmark.color = isCompleted ? Color.black : Color.white;
+        }
+    }
+
+    // Метод для сброса прогресса (можно вызвать из кнопки UI)
+    public void ResetProgress()
+    {
+        for (int i = 0; i < questionToggles.Length; i++)
+        {
+            string key = saveKeyPrefix + i.ToString();
+            PlayerPrefs.DeleteKey(key);
+
+            if (questionToggles[i] != null)
+            {
+                questionToggles[i].SetIsOnWithoutNotify(false);
+                UpdateToggleAppearance(questionToggles[i], false);
+            }
+        }
+        PlayerPrefs.Save();
+        Debug.Log("Прогресс сброшен");
+    }
+
+    // Метод для принудительного сохранения всех состояний
+    public void SaveAllStates()
+    {
+        for (int i = 0; i < questionToggles.Length; i++)
+        {
+            if (questionToggles[i] != null)
+            {
+                string key = saveKeyPrefix + i.ToString();
+                PlayerPrefs.SetInt(key, questionToggles[i].isOn ? 1 : 0);
+            }
+        }
+        PlayerPrefs.Save();
+        Debug.Log("Все состояния сохранены");
+    }
+
+    void OnApplicationQuit()
+    {
+        SaveAllStates();
     }
 
     void OnDestroy()
     {
-        // Отписываемся от событий при уничтожении объекта
-        soundToggle.onValueChanged.RemoveListener(OnSoundToggleChanged);
-        musicToggle.onValueChanged.RemoveListener(OnMusicToggleChanged);
-        vibrationToggle.onValueChanged.RemoveListener(OnVibrationToggleChanged);
+        SaveAllStates();
     }
 }

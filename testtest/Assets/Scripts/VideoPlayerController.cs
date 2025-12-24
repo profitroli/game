@@ -2,6 +2,8 @@
 using UnityEngine.UI;
 using UnityEngine.Video;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
+using System;
 
 public class VideoPlayerController : MonoBehaviour
 {
@@ -19,15 +21,38 @@ public class VideoPlayerController : MonoBehaviour
     public Text timeText;
     public bool allowSeeking = true;
 
+    [Header("Сохранение прогресса")]
+    [Tooltip("Автоматически сохранять прогресс при выходе со страницы")]
+    public bool autoSaveProgress = true;
+    [Tooltip("Сохранять прогресс только при нажатии паузы")]
+    public bool saveOnlyOnPause = true;
+
     private VideoPlayer videoPlayer;
     private AudioSource audioSource;
     private RenderTexture renderTexture;
     private bool isPaused = false;
     private bool isDraggingSlider = false;
-    private double savedTimeWhenPaused = 0; // Сохраняем время при паузе
+    private double savedTimeWhenPaused = 0;
+
+    // Ключ для сохранения прогресса
+    private string saveKey;
+
+    // Флаги для отслеживания состояния
+    private bool wasPausedOnExit = false;
+    private bool hasManuallyPaused = false;
+    private bool isInitialized = false;
+    private bool shouldRestoreFromSave = false;
 
     void Start()
     {
+        InitializeVideoController();
+    }
+
+    void InitializeVideoController()
+    {
+        // Генерируем уникальный ключ для сохранения
+        saveKey = $"VideoProgress_{SceneManager.GetActiveScene().name}_{gameObject.name}_{videoClip?.name}";
+
         SetupVideoPlayer();
         SetupButtons();
         SetupProgressSlider();
@@ -39,6 +64,11 @@ public class VideoPlayerController : MonoBehaviour
 
         if (progressSlider != null)
             progressSlider.gameObject.SetActive(false);
+
+        // Загружаем сохраненный прогресс
+        LoadVideoProgress();
+
+        isInitialized = true;
     }
 
     void SetupVideoPlayer()
@@ -50,7 +80,9 @@ public class VideoPlayerController : MonoBehaviour
         videoPlayer.playOnAwake = false;
         videoPlayer.renderMode = VideoRenderMode.RenderTexture;
         videoPlayer.targetTexture = renderTexture;
-        videoPlayer.clip = videoClip;
+
+        if (videoClip != null)
+            videoPlayer.clip = videoClip;
 
         videoPlayer.audioOutputMode = VideoAudioOutputMode.AudioSource;
         audioSource = gameObject.AddComponent<AudioSource>();
@@ -58,9 +90,102 @@ public class VideoPlayerController : MonoBehaviour
 
         videoPlayer.isLooping = false;
         videoPlayer.loopPointReached += OnVideoFinished;
-
-        // Подписываемся на событие подготовки видео
         videoPlayer.prepareCompleted += OnVideoPrepared;
+    }
+
+    // Загружаем сохраненный прогресс видео
+    void LoadVideoProgress()
+    {
+        if (!autoSaveProgress) return;
+
+        // Проверяем, есть ли сохраненные данные для этого видео
+        if (PlayerPrefs.HasKey(saveKey))
+        {
+            savedTimeWhenPaused = PlayerPrefs.GetFloat(saveKey, 0f);
+            wasPausedOnExit = PlayerPrefs.GetInt($"{saveKey}_paused", 0) == 1;
+            hasManuallyPaused = PlayerPrefs.GetInt($"{saveKey}_manualPause", 0) == 1;
+
+            Debug.Log($"Загружено сохраненное время: {savedTimeWhenPaused:F2}с, " +
+                     $"было на паузе: {wasPausedOnExit}, ручная пауза: {hasManuallyPaused}");
+
+            // Проверяем, нужно ли восстанавливать с сохраненной позиции
+            if (saveOnlyOnPause)
+            {
+                // Восстанавливаем только если было на паузе И пользователь сам нажал паузу
+                shouldRestoreFromSave = wasPausedOnExit && hasManuallyPaused && savedTimeWhenPaused > 0;
+            }
+            else
+            {
+                // Восстанавливаем всегда если было сохранено
+                shouldRestoreFromSave = wasPausedOnExit && savedTimeWhenPaused > 0;
+            }
+
+            if (shouldRestoreFromSave)
+            {
+                PrepareVideoFromSavedTime();
+            }
+        }
+        else
+        {
+            Debug.Log("Сохраненный прогресс не найден, начнем с начала");
+        }
+    }
+
+    void PrepareVideoFromSavedTime()
+    {
+        if (videoClip == null) return;
+
+        videoPlayer.clip = videoClip;
+
+        if (!videoPlayer.isPrepared)
+        {
+            videoPlayer.Prepare();
+            videoPlayer.prepareCompleted += OnVideoPreparedWithSavedTime;
+        }
+        else
+        {
+            SetupUIForPausedVideo();
+        }
+    }
+
+    void OnVideoPreparedWithSavedTime(VideoPlayer vp)
+    {
+        videoPlayer.prepareCompleted -= OnVideoPreparedWithSavedTime;
+        SetupUIForPausedVideo();
+    }
+
+    void SetupUIForPausedVideo()
+    {
+        if (videoPlayer.length <= 0) return;
+
+        videoDisplay.gameObject.SetActive(true);
+
+        // Устанавливаем сохраненное время
+        videoPlayer.time = Math.Min(savedTimeWhenPaused, videoPlayer.length - 0.1);
+        videoPlayer.Pause();
+        isPaused = true;
+
+        if (playButton != null)
+            playButton.gameObject.SetActive(false);
+
+        if (stopButton != null)
+        {
+            stopButton.gameObject.SetActive(true);
+            UpdateStopButtonText();
+        }
+
+        if (progressSlider != null)
+        {
+            progressSlider.gameObject.SetActive(true);
+            progressSlider.value = (float)(savedTimeWhenPaused / videoPlayer.length);
+        }
+
+        if (timeText != null)
+        {
+            UpdateTimeText((float)savedTimeWhenPaused, (float)videoPlayer.length);
+        }
+
+        Debug.Log($"Видео восстановлено с позиции: {savedTimeWhenPaused:F2} секунд");
     }
 
     void SetupButtons()
@@ -75,10 +200,18 @@ public class VideoPlayerController : MonoBehaviour
         {
             stopButton.onClick.RemoveAllListeners();
             stopButton.onClick.AddListener(TogglePause);
+            UpdateStopButtonText();
+        }
+    }
 
-            Text stopButtonText = stopButton.GetComponentInChildren<Text>();
-            if (stopButtonText != null)
-                stopButtonText.text = "⏸ Пауза";
+    void UpdateStopButtonText()
+    {
+        if (stopButton == null) return;
+
+        Text stopButtonText = stopButton.GetComponentInChildren<Text>();
+        if (stopButtonText != null)
+        {
+            stopButtonText.text = isPaused ? "▶ Продолжить" : "⏸ Пауза";
         }
     }
 
@@ -90,20 +223,18 @@ public class VideoPlayerController : MonoBehaviour
             progressSlider.maxValue = 1;
             progressSlider.value = 0;
 
-            // Добавляем EventTrigger для обработки перетаскивания
             AddSliderEventTriggers();
-
-            // Также добавляем слушатель для изменения значения
             progressSlider.onValueChanged.AddListener(OnSliderValueChanged);
         }
 
-        // Инициализируем текст времени
         if (timeText != null)
             timeText.text = "00:00 / --:--";
     }
 
     void AddSliderEventTriggers()
     {
+        if (progressSlider == null) return;
+
         EventTrigger trigger = progressSlider.gameObject.GetComponent<EventTrigger>();
         if (trigger == null)
         {
@@ -121,33 +252,76 @@ public class VideoPlayerController : MonoBehaviour
         pointerUpEntry.eventID = EventTriggerType.PointerUp;
         pointerUpEntry.callback.AddListener((data) => { OnSliderPointerUp(); });
         trigger.triggers.Add(pointerUpEntry);
-
-        // Событие отпускания кнопки мыши (на всякий случай)
-        EventTrigger.Entry endDragEntry = new EventTrigger.Entry();
-        endDragEntry.eventID = EventTriggerType.EndDrag;
-        endDragEntry.callback.AddListener((data) => { OnSliderPointerUp(); });
-        trigger.triggers.Add(endDragEntry);
     }
 
-    // Вызывается при начале перетаскивания слайдера
+    // Сохраняем прогресс видео
+    void SaveVideoProgress()
+    {
+        if (!autoSaveProgress || !isInitialized) return;
+
+        // Определяем, нужно ли сохранять
+        bool shouldSave = false;
+
+        if (saveOnlyOnPause)
+        {
+            // Сохраняем только если видео было на паузе И пользователь сам нажал паузу
+            shouldSave = isPaused && hasManuallyPaused;
+        }
+        else
+        {
+            // Сохраняем если видео на паузе (неважно как)
+            shouldSave = isPaused;
+        }
+
+        if (shouldSave && videoPlayer != null && videoPlayer.length > 0)
+        {
+            float timeToSave = (float)(isPaused ? savedTimeWhenPaused : videoPlayer.time);
+
+            // Не сохраняем если видео почти закончилось (последние 2 секунды)
+            if (timeToSave >= videoPlayer.length - 2.0)
+            {
+                ClearSavedProgress();
+                return;
+            }
+
+            PlayerPrefs.SetFloat(saveKey, timeToSave);
+            PlayerPrefs.SetInt($"{saveKey}_paused", isPaused ? 1 : 0);
+            PlayerPrefs.SetInt($"{saveKey}_manualPause", hasManuallyPaused ? 1 : 0);
+            PlayerPrefs.Save();
+
+            Debug.Log($"Прогресс сохранен: {timeToSave:F2}с, пауза: {isPaused}, ручная: {hasManuallyPaused}");
+        }
+        else if (!isPaused)
+        {
+            // Если видео не на паузе, очищаем сохранение
+            ClearSavedProgress();
+        }
+    }
+
+    void ClearSavedProgress()
+    {
+        PlayerPrefs.DeleteKey(saveKey);
+        PlayerPrefs.DeleteKey($"{saveKey}_paused");
+        PlayerPrefs.DeleteKey($"{saveKey}_manualPause");
+        PlayerPrefs.Save();
+        Debug.Log("Сохраненный прогресс очищен");
+    }
+
+    // Методы для слайдера
     public void OnSliderPointerDown()
     {
         if (allowSeeking && videoPlayer != null && videoPlayer.length > 0)
         {
             isDraggingSlider = true;
-            Debug.Log("Начало перетаскивания слайдера");
         }
     }
 
-    // Вызывается при изменении значения слайдера (включая перетаскивание)
     void OnSliderValueChanged(float value)
     {
         if (allowSeeking && videoPlayer != null && videoPlayer.length > 0)
         {
-            // Обновляем текст времени
             double targetTime = value * videoPlayer.length;
 
-            // Если на паузе, используем сохраненное время для отображения
             if (isPaused)
             {
                 UpdateTimeText((float)savedTimeWhenPaused, (float)videoPlayer.length);
@@ -157,51 +331,39 @@ public class VideoPlayerController : MonoBehaviour
                 UpdateTimeText((float)targetTime, (float)videoPlayer.length);
             }
 
-            // Если пользователь перетаскивает слайдер, перематываем видео
             if (isDraggingSlider)
             {
-                // Сохраняем состояние воспроизведения
                 bool wasPlaying = videoPlayer.isPlaying && !isPaused;
-
-                // Устанавливаем новое время
                 videoPlayer.time = targetTime;
+
                 if (isPaused)
                 {
-                    savedTimeWhenPaused = targetTime; // Обновляем сохраненное время
+                    savedTimeWhenPaused = targetTime;
                 }
 
-                // Если видео было на паузе, не возобновляем воспроизведение
                 if (!wasPlaying)
                 {
                     videoPlayer.Pause();
                 }
-
-                Debug.Log($"Перемотка при перетаскивании: {targetTime:F2} секунд");
             }
         }
     }
 
-    // Вызывается при отпускании слайдера
     public void OnSliderPointerUp()
     {
         if (allowSeeking && videoPlayer != null && videoPlayer.length > 0)
         {
             isDraggingSlider = false;
 
-            // Если видео было на паузе до перетаскивания, оставляем на паузе
             if (isPaused && videoPlayer.isPrepared)
             {
                 videoPlayer.Pause();
-                // Обновляем сохраненное время после перетаскивания
                 savedTimeWhenPaused = videoPlayer.time;
                 UpdateTimeText((float)savedTimeWhenPaused, (float)videoPlayer.length);
             }
-
-            Debug.Log("Окончание перетаскивания слайдера");
         }
     }
 
-    // Альтернативный метод перемотки
     public void SeekToTime(float normalizedTime)
     {
         if (videoPlayer != null && videoPlayer.length > 0)
@@ -211,56 +373,70 @@ public class VideoPlayerController : MonoBehaviour
 
             if (isPaused)
             {
-                savedTimeWhenPaused = targetTime; // Обновляем сохраненное время
+                savedTimeWhenPaused = targetTime;
             }
 
             if (progressSlider != null)
                 progressSlider.value = normalizedTime;
-
-            Debug.Log($"Перемотка на: {targetTime:F2} секунд");
         }
     }
 
+    // Основные методы управления видео
     public void PlayVideo()
     {
-        if (videoPlayer != null && videoClip != null)
-        {
-            if (isPaused)
-            {
-                ResumeVideo();
-                return;
-            }
-
-            StartVideoPlayback();
-        }
-        else
+        if (videoPlayer == null || videoClip == null)
         {
             Debug.LogError("Видео или VideoPlayer не настроены!");
+            return;
         }
+
+        if (isPaused)
+        {
+            ResumeVideo();
+            return;
+        }
+
+        StartVideoPlayback();
     }
 
     void StartVideoPlayback()
     {
-        // Сначала подготавливаем видео, чтобы получить его длину
+        // Если есть сохранение и мы его не использовали, спрашиваем пользователя
+        if (shouldRestoreFromSave && !hasManuallyPaused)
+        {
+            // Здесь можно показать диалоговое окно с вопросом
+            // "Продолжить с момента паузы или начать сначала?"
+            // Для простоты автоматически продолжаем
+            ContinueFromSavedPosition();
+            return;
+        }
+
+        // Иначе начинаем с начала
+        ActuallyStartPlayback(0);
+    }
+
+    void ContinueFromSavedPosition()
+    {
         if (!videoPlayer.isPrepared)
         {
             videoPlayer.Prepare();
-            videoPlayer.prepareCompleted += OnVideoPreparedForPlayback;
+            videoPlayer.prepareCompleted += OnVideoPreparedForContinue;
         }
         else
         {
-            ActuallyStartPlayback();
+            ActuallyStartPlayback(savedTimeWhenPaused);
         }
+
+        shouldRestoreFromSave = false;
     }
 
-    void OnVideoPreparedForPlayback(VideoPlayer vp)
+    void OnVideoPreparedForContinue(VideoPlayer vp)
     {
-        // Удаляем временный обработчик
-        videoPlayer.prepareCompleted -= OnVideoPreparedForPlayback;
-        ActuallyStartPlayback();
+        videoPlayer.prepareCompleted -= OnVideoPreparedForContinue;
+        ActuallyStartPlayback(savedTimeWhenPaused);
     }
 
-    void ActuallyStartPlayback()
+    void ActuallyStartPlayback(double startTime)
     {
         videoDisplay.gameObject.SetActive(true);
 
@@ -270,21 +446,28 @@ public class VideoPlayerController : MonoBehaviour
         if (stopButton != null)
         {
             stopButton.gameObject.SetActive(true);
-            Text stopButtonText = stopButton.GetComponentInChildren<Text>();
-            if (stopButtonText != null)
-                stopButtonText.text = "⏸ Пауза";
+            UpdateStopButtonText();
         }
 
         if (progressSlider != null)
             progressSlider.gameObject.SetActive(true);
 
-        // Обновляем текст времени с общей длиной видео
-        UpdateTimeText(0f, (float)videoPlayer.length);
+        // Устанавливаем начальное время
+        videoPlayer.time = startTime;
+
+        // Обновляем UI
+        if (videoPlayer.length > 0)
+        {
+            UpdateTimeText((float)startTime, (float)videoPlayer.length);
+            if (progressSlider != null)
+                progressSlider.value = (float)(startTime / videoPlayer.length);
+        }
 
         videoPlayer.Play();
         isPaused = false;
-        savedTimeWhenPaused = 0;
-        Debug.Log("Воспроизведение видео: " + videoClip.name);
+        hasManuallyPaused = false;
+
+        Debug.Log($"Воспроизведение видео с позиции: {startTime:F2} секунд");
     }
 
     public void TogglePause()
@@ -307,23 +490,20 @@ public class VideoPlayerController : MonoBehaviour
         {
             videoPlayer.Pause();
             isPaused = true;
-            // Сохраняем текущее время при паузе
+            hasManuallyPaused = true; // Отметим, что пауза была ручной
             savedTimeWhenPaused = videoPlayer.time;
 
-            if (stopButton != null)
-            {
-                Text stopButtonText = stopButton.GetComponentInChildren<Text>();
-                if (stopButtonText != null)
-                    stopButtonText.text = "▶ Продолжить";
-            }
+            UpdateStopButtonText();
 
             Debug.Log("Видео приостановлено. Сохраненное время: " + savedTimeWhenPaused);
+
+            // Автосохранение при паузе
+            SaveVideoProgress();
         }
     }
 
     void ResumeVideo()
     {
-        // Восстанавливаем время из сохраненного значения
         if (isPaused)
         {
             videoPlayer.time = savedTimeWhenPaused;
@@ -332,12 +512,7 @@ public class VideoPlayerController : MonoBehaviour
         videoPlayer.Play();
         isPaused = false;
 
-        if (stopButton != null)
-        {
-            Text stopButtonText = stopButton.GetComponentInChildren<Text>();
-            if (stopButtonText != null)
-                stopButtonText.text = "⏸ Пауза";
-        }
+        UpdateStopButtonText();
 
         Debug.Log("Воспроизведение видео продолжено с времени: " + savedTimeWhenPaused);
     }
@@ -348,7 +523,12 @@ public class VideoPlayerController : MonoBehaviour
 
         videoPlayer.Stop();
         isPaused = false;
+        hasManuallyPaused = false;
         savedTimeWhenPaused = 0;
+        shouldRestoreFromSave = false;
+
+        // Очищаем сохранение при остановке
+        ClearSavedProgress();
 
         videoDisplay.gameObject.SetActive(false);
 
@@ -367,7 +547,7 @@ public class VideoPlayerController : MonoBehaviour
         if (timeText != null)
             timeText.text = "00:00 / --:--";
 
-        Debug.Log("Воспроизведение видео остановлено");
+        Debug.Log("Воспроизведение видео остановлено и прогресс сброшен");
     }
 
     void OnVideoFinished(VideoPlayer vp)
@@ -392,12 +572,29 @@ public class VideoPlayerController : MonoBehaviour
         }
 
         isPaused = false;
+        hasManuallyPaused = false;
         savedTimeWhenPaused = 0;
-        Debug.Log("Видео завершено");
+        shouldRestoreFromSave = false;
+
+        // Очищаем сохранение при завершении видео
+        ClearSavedProgress();
+
+        Debug.Log("Видео завершено, прогресс сброшен");
+    }
+
+    void OnVideoPrepared(VideoPlayer vp)
+    {
+        Debug.Log("Видео подготовлено. Длина: " + vp.length + " секунд");
+
+        if (timeText != null && !videoPlayer.isPlaying)
+        {
+            timeText.text = "00:00 / " + FormatTime((float)videoPlayer.length);
+        }
     }
 
     void Update()
     {
+        // Управление с клавиатуры
         if (Input.GetKeyDown(KeyCode.Space))
         {
             TogglePause();
@@ -416,28 +613,26 @@ public class VideoPlayerController : MonoBehaviour
 
     void UpdateProgressSlider()
     {
-        if (videoPlayer != null && progressSlider != null && videoPlayer.length > 0)
+        if (videoPlayer == null || progressSlider == null || videoPlayer.length <= 0) return;
+
+        if (videoPlayer.isPlaying && videoPlayer.frameCount > 0)
         {
-            if (videoPlayer.isPlaying && videoPlayer.frameCount > 0)
-            {
-                float progress = (float)(videoPlayer.time / videoPlayer.length);
-                progressSlider.value = progress;
+            float progress = (float)(videoPlayer.time / videoPlayer.length);
+            progressSlider.value = progress;
 
-                if (timeText != null)
-                {
-                    UpdateTimeText((float)videoPlayer.time, (float)videoPlayer.length);
-                }
+            if (timeText != null)
+            {
+                UpdateTimeText((float)videoPlayer.time, (float)videoPlayer.length);
             }
-            else if (isPaused)
-            {
-                // При паузе используем сохраненное время
-                float progress = (float)(savedTimeWhenPaused / videoPlayer.length);
-                progressSlider.value = progress;
+        }
+        else if (isPaused)
+        {
+            float progress = (float)(savedTimeWhenPaused / videoPlayer.length);
+            progressSlider.value = progress;
 
-                if (timeText != null)
-                {
-                    UpdateTimeText((float)savedTimeWhenPaused, (float)videoPlayer.length);
-                }
+            if (timeText != null)
+            {
+                UpdateTimeText((float)savedTimeWhenPaused, (float)videoPlayer.length);
             }
         }
     }
@@ -454,33 +649,40 @@ public class VideoPlayerController : MonoBehaviour
 
     string FormatTime(float timeInSeconds)
     {
-        int minutes = Mathf.FloorToInt(timeInSeconds / 60);
-        int seconds = Mathf.FloorToInt(timeInSeconds % 60);
-
-        // Если время не определено (NaN или отрицательное)
         if (float.IsNaN(timeInSeconds) || timeInSeconds < 0)
         {
             return "--:--";
         }
 
+        int minutes = Mathf.FloorToInt(timeInSeconds / 60);
+        int seconds = Mathf.FloorToInt(timeInSeconds % 60);
+
         return $"{minutes:00}:{seconds:00}";
     }
 
-    // Новый метод для обработки подготовки видео
-    void OnVideoPrepared(VideoPlayer vp)
+    // Методы для сохранения при выходе
+    void OnApplicationPause(bool pauseStatus)
     {
-        // Этот метод вызывается, когда видео готово к воспроизведению
-        Debug.Log("Видео подготовлено. Длина: " + vp.length + " секунд");
-
-        // Можно обновить UI с общей длиной видео
-        if (timeText != null && !videoPlayer.isPlaying)
+        if (pauseStatus)
         {
-            timeText.text = "00:00 / " + FormatTime((float)videoPlayer.length);
+            SaveVideoProgress();
         }
+    }
+
+    void OnApplicationQuit()
+    {
+        SaveVideoProgress();
+    }
+
+    void OnDisable()
+    {
+        SaveVideoProgress();
     }
 
     void OnDestroy()
     {
+        SaveVideoProgress();
+
         if (videoPlayer != null)
         {
             videoPlayer.loopPointReached -= OnVideoFinished;
@@ -496,5 +698,23 @@ public class VideoPlayerController : MonoBehaviour
         {
             progressSlider.onValueChanged.RemoveListener(OnSliderValueChanged);
         }
+    }
+
+    // Публичные методы для ручного управления сохранением
+    public void ForceSaveProgress()
+    {
+        SaveVideoProgress();
+    }
+
+    public void ClearProgress()
+    {
+        ClearSavedProgress();
+    }
+
+    public void ExitPage()
+    {
+        SaveVideoProgress();
+        // Здесь добавьте ваш код перехода на другую страницу
+        Debug.Log("Выход со страницы видео, прогресс сохранен");
     }
 }
