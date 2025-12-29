@@ -2766,7 +2766,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1.6700134, y: -987.8926}
+  m_AnchoredPosition: {x: -1.670044, y: -987.8926}
   m_SizeDelta: {x: 0, y: 1977.7952}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &992504347
@@ -2784,7 +2784,7 @@ MonoBehaviour:
   scrollSpeed: 20
   minYPosition: -1000
   maxYPosition: 700
-  invertScrollDirection: 0
+  invertScrollDirection: 1
   showDebugBounds: 1
 --- !u!114 &992504348
 MonoBehaviour:
@@ -6058,12 +6058,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 971.34, y: 589}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.646
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
