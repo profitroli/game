@@ -13,8 +13,20 @@ public class FadeInMenu : MonoBehaviour
     [SerializeField] private float startDelay = 0.5f;
     [SerializeField] private bool fadeBackground = true;
 
+    // Ключ для сохранения в PlayerPrefs
+    private const string FIRST_LAUNCH_KEY = "FirstLaunchCompleted";
+
     void Start()
     {
+        // Проверяем, первый ли это запуск
+        bool isFirstLaunch = PlayerPrefs.GetInt(FIRST_LAUNCH_KEY, 1) == 1;
+
+        // Если не первый запуск и есть сохраненный черный экран, сразу удаляем его
+        if (!isFirstLaunch && blackScreen == null)
+        {
+            FindAndDisableBlackScreen();
+        }
+
         // Если не назначены, ищем автоматически
         if (menuCanvasGroup == null)
         {
@@ -33,8 +45,8 @@ public class FadeInMenu : MonoBehaviour
             }
         }
 
-        // Ищем черный экран
-        if (blackScreen == null)
+        // Ищем черный экран только если это первый запуск
+        if (isFirstLaunch && blackScreen == null)
         {
             GameObject blackScreenObj = GameObject.Find("BlackScreen");
             if (blackScreenObj != null)
@@ -43,8 +55,21 @@ public class FadeInMenu : MonoBehaviour
             }
         }
 
-        // Начинаем плавное появление
-        StartCoroutine(FadeInSequence());
+        // Начинаем плавное появление (или сразу показываем меню)
+        if (isFirstLaunch)
+        {
+            StartCoroutine(FadeInSequence());
+        }
+        else
+        {
+            // Если не первый запуск - сразу показываем меню
+            if (menuCanvasGroup != null)
+            {
+                menuCanvasGroup.alpha = 1;
+                menuCanvasGroup.interactable = true;
+                menuCanvasGroup.blocksRaycasts = true;
+            }
+        }
     }
 
     IEnumerator FadeInSequence()
@@ -57,7 +82,7 @@ public class FadeInMenu : MonoBehaviour
             menuCanvasGroup.blocksRaycasts = false;
         }
 
-        // Создаем черный экран если его нет
+        // Создаем черный экран если его нет и это первый запуск
         if (blackScreen == null && fadeBackground)
         {
             blackScreen = CreateBlackScreen();
@@ -117,7 +142,18 @@ public class FadeInMenu : MonoBehaviour
         blackScreen.color = endColor;
         blackScreen.gameObject.SetActive(false);
 
-        Debug.Log("Черный экран убран");
+        // Помечаем, что первый запуск завершен
+        PlayerPrefs.SetInt(FIRST_LAUNCH_KEY, 0);
+        PlayerPrefs.Save();
+
+        // Удаляем черный экран если он был создан динамически
+        if (blackScreen.transform.parent != null &&
+            blackScreen.transform.parent.name == "BlackScreenCanvas")
+        {
+            Destroy(blackScreen.transform.parent.gameObject);
+        }
+
+        Debug.Log("Черный экран убран и первый запуск завершен");
     }
 
     Image CreateBlackScreen()
@@ -127,6 +163,12 @@ public class FadeInMenu : MonoBehaviour
         Canvas blackScreenCanvas = blackScreenCanvasObj.AddComponent<Canvas>();
         blackScreenCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
         blackScreenCanvas.sortingOrder = 9999; // Поверх всего
+
+        // Добавляем CanvasScaler для правильного масштабирования
+        CanvasScaler scaler = blackScreenCanvasObj.AddComponent<CanvasScaler>();
+        scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+        scaler.referenceResolution = new Vector2(1920, 1080);
+        scaler.matchWidthOrHeight = 0.5f;
 
         // Создаем Image для черного экрана
         GameObject blackScreenObj = new GameObject("BlackScreen");
@@ -143,5 +185,37 @@ public class FadeInMenu : MonoBehaviour
         rect.offsetMax = Vector2.zero;
 
         return screenImage;
+    }
+
+    void FindAndDisableBlackScreen()
+    {
+        // Ищем черный экран на сцене и отключаем его
+        GameObject blackScreenObj = GameObject.Find("BlackScreen");
+        if (blackScreenObj != null)
+        {
+            blackScreenObj.SetActive(false);
+
+            // Если есть родительский Canvas, удаляем его тоже
+            Transform parent = blackScreenObj.transform.parent;
+            if (parent != null && parent.name == "BlackScreenCanvas")
+            {
+                Destroy(parent.gameObject);
+            }
+        }
+
+        // Также ищем Canvas с черным экраном
+        GameObject blackScreenCanvas = GameObject.Find("BlackScreenCanvas");
+        if (blackScreenCanvas != null)
+        {
+            Destroy(blackScreenCanvas);
+        }
+    }
+
+    // Метод для сброса (например, для тестирования)
+    public void ResetFirstLaunch()
+    {
+        PlayerPrefs.DeleteKey(FIRST_LAUNCH_KEY);
+        PlayerPrefs.Save();
+        Debug.Log("Первый запуск сброшен");
     }
 }

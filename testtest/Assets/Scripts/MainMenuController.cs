@@ -13,48 +13,158 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private Button miniGamesButton;
     [SerializeField] private Button preparationButton;
     [SerializeField] private Button exitButton;
-    [SerializeField] private Button settingsButton; // Добавим кнопку настроек
+    [SerializeField] private Button settingsButton;
     [SerializeField] private CanvasGroup menuCanvasGroup;
 
     [Header("Сцены для загрузки")]
     [SerializeField] private string lecturesSceneName = "LecturesScene";
     [SerializeField] private string miniGamesSceneName = "GamesScene";
     [SerializeField] private string preparationSceneName = "PreparationScene";
-    [SerializeField] private string settingsSceneName = "SettingsScene"; // Сцена настроек
-    [SerializeField] private string mainMenuSceneName = "MainMenu";
+    [SerializeField] private string settingsSceneName = "SettingsScene";
 
-    [Header("Черный экран")]
-    [SerializeField] private Image blackScreenImage; // Ссылка на Image черного экрана
-    [SerializeField] private GameObject blackScreenObject; // Или ссылка на GameObject
-
-    private const string BLACK_SCREEN_NAME = "IntroBlackScreen";
-
-    // Статическая переменная для отслеживания источника перехода
-    private static bool cameFromIntroVideo = false;
-    private static bool firstTime = true;
+    // Статические переменные для отслеживания состояния
+    private static bool isFirstTime = true;
+    private static bool shouldKeepBlackScreen = false;
 
     void Awake()
     {
-        // Если это первый запуск, сбрасываем флаги
-        if (firstTime)
+        Debug.Log("MainMenu Awake - isFirstTime: " + isFirstTime);
+
+        if (isFirstTime)
         {
-            cameFromIntroVideo = true;
-            firstTime = false;
+            // Первый раз - оставляем черный экран для анимации
+            isFirstTime = false;
+            shouldKeepBlackScreen = true;
+            Debug.Log("Это первый запуск, оставляем черный экран для анимации");
+        }
+        else
+        {
+            // Не первый раз - удаляем черный экран сразу
+            shouldKeepBlackScreen = false;
+            DestroyAllBlackScreensImmediately();
+            Debug.Log("Не первый запуск, удаляем черный экран сразу");
+        }
+    }
+
+    void Start()
+    {
+        Debug.Log("MainMenu Start - shouldKeepBlackScreen: " + shouldKeepBlackScreen);
+
+        if (shouldKeepBlackScreen)
+        {
+            // Если нужно оставить черный экран для анимации
+            StartCoroutine(ShowMenuWithFade());
+            shouldKeepBlackScreen = false; // После анимации больше не нужно
+        }
+        else
+        {
+            // Если черный экран уже удален или не нужен
+            ShowMenuInstantly();
         }
 
-        Debug.Log("MainMenuController: Awake - cameFromIntroVideo = " + cameFromIntroVideo);
-    }
-
-    public void LoadSettingsScene()
-    {
-        LoadSceneWithValidation(settingsSceneName, "настроек");
-    }
-
-    private void Start()
-    {
         InitializeButtons();
-        InitializeMenuVisibility();
-        Debug.Log("MainMenuController: Start - cameFromIntroVideo = " + cameFromIntroVideo);
+    }
+
+    IEnumerator ShowMenuWithFade()
+    {
+        Debug.Log("Начинаем анимацию с черным экраном");
+
+        // Ищем черный экран
+        GameObject blackScreen = GameObject.Find("FadeImage");
+        if (blackScreen == null)
+        {
+            blackScreen = GameObject.Find("BlackScreenCanvas");
+        }
+
+        // Ищем черный Image
+        Image blackScreenImage = null;
+        if (blackScreen != null)
+        {
+            blackScreenImage = blackScreen.GetComponent<Image>();
+            if (blackScreenImage == null)
+            {
+                blackScreenImage = blackScreen.GetComponentInChildren<Image>();
+            }
+        }
+
+        // Скрываем меню в начале
+        if (menuCanvasGroup != null)
+        {
+            menuCanvasGroup.alpha = 0;
+            menuCanvasGroup.interactable = false;
+            menuCanvasGroup.blocksRaycasts = false;
+        }
+
+        // Ждем небольшую паузу
+        yield return new WaitForSeconds(0.5f);
+
+        float timer = 0f;
+
+        while (timer < fadeTime)
+        {
+            float progress = timer / fadeTime;
+
+            // Плавно убираем черный экран
+            if (blackScreenImage != null)
+            {
+                blackScreenImage.color = new Color(0, 0, 0, 1 - progress);
+            }
+
+            // Плавно показываем меню
+            if (menuCanvasGroup != null)
+            {
+                menuCanvasGroup.alpha = progress;
+            }
+
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        // Завершаем анимацию
+        if (blackScreen != null)
+        {
+            Destroy(blackScreen);
+            Debug.Log("Черный экран удален после анимации");
+        }
+
+        if (menuCanvasGroup != null)
+        {
+            menuCanvasGroup.alpha = 1;
+            menuCanvasGroup.interactable = true;
+            menuCanvasGroup.blocksRaycasts = true;
+        }
+
+        Debug.Log("Анимация завершена, меню показано");
+    }
+
+    private void DestroyAllBlackScreensImmediately()
+    {
+        // Удаляем все возможные черные экраны
+        GameObject[] blackScreenNames = {
+            GameObject.Find("FadeImage"),
+            GameObject.Find("BlackScreenCanvas"),
+            GameObject.Find("BlackScreen")
+        };
+
+        foreach (GameObject obj in blackScreenNames)
+        {
+            if (obj != null)
+            {
+                Destroy(obj);
+                Debug.Log("Удален черный экран: " + obj.name);
+            }
+        }
+
+        // Ищем все черные изображения
+        Image[] allImages = FindObjectsOfType<Image>(true);
+        foreach (Image img in allImages)
+        {
+            if (img.color == Color.black && img.gameObject.name.Contains("Black"))
+            {
+                Destroy(img.gameObject);
+                Debug.Log("Удалено черное изображение: " + img.name);
+            }
+        }
     }
 
     private void InitializeButtons()
@@ -67,145 +177,10 @@ public class MainMenuController : MonoBehaviour
         settingsButton?.onClick.AddListener(LoadSettingsScene);
     }
 
-    private void InitializeMenuVisibility()
-    {
-        // Скрываем меню в начале
-        if (menuCanvasGroup != null)
-        {
-            menuCanvasGroup.alpha = 0;
-            menuCanvasGroup.interactable = false;
-            menuCanvasGroup.blocksRaycasts = false;
-        }
-
-        // Ищем черный экран разными способами
-        GameObject blackScreen = null;
-
-        // Способ 1: По имени
-        blackScreen = GameObject.Find(BLACK_SCREEN_NAME);
-
-        // Способ 2: По тегу (если есть)
-        if (blackScreen == null)
-        {
-            GameObject[] blackScreens = GameObject.FindGameObjectsWithTag("BlackScreen");
-            if (blackScreens.Length > 0)
-            {
-                blackScreen = blackScreens[0];
-            }
-        }
-
-        // Способ 3: Через сериализованное поле
-        if (blackScreen == null && blackScreenObject != null)
-        {
-            blackScreen = blackScreenObject;
-        }
-
-        // Способ 4: Ищем компонент Image с черным цветом
-        if (blackScreen == null)
-        {
-            Image[] allImages = FindObjectsOfType<Image>(true); // true чтобы найти неактивные
-            foreach (Image img in allImages)
-            {
-                if (img.color == Color.black && img.gameObject.name.Contains("Black"))
-                {
-                    blackScreen = img.gameObject;
-                    break;
-                }
-            }
-        }
-
-        Debug.Log("MainMenuController: Найден черный экран? " + (blackScreen != null));
-        Debug.Log("MainMenuController: Пришли из интро? " + cameFromIntroVideo);
-
-        if (blackScreen != null)
-        {
-            if (cameFromIntroVideo)
-            {
-                // Если пришли из видео-заставки - показываем анимацию с черным экраном
-                Debug.Log("MainMenuController: Запускаем анимацию с черным экраном");
-                StartCoroutine(ShowMenuWithFade(blackScreen));
-                cameFromIntroVideo = false; // Сбрасываем флаг
-            }
-            else
-            {
-                // Если вернулись из другой сцены - сразу удаляем черный экран
-                Debug.Log("MainMenuController: Удаляем черный экран сразу");
-                Destroy(blackScreen);
-                ShowMenuInstantly();
-            }
-        }
-        else
-        {
-            // Если черного экрана нет - показываем меню сразу
-            Debug.Log("MainMenuController: Черный экран не найден, показываем меню сразу");
-            ShowMenuInstantly();
-        }
-    }
-
-    private IEnumerator ShowMenuWithFade(GameObject blackScreen)
-    {
-        Debug.Log("MainMenuController: Начинаем анимацию появления");
-
-        // Ждем небольшую паузу перед началом анимации
-        yield return new WaitForSeconds(0.7f);
-
-        Image blackScreenImage = blackScreen.GetComponent<Image>();
-        if (blackScreenImage == null)
-        {
-            // Если нет компонента Image, пробуем найти в дочерних объектах
-            blackScreenImage = blackScreen.GetComponentInChildren<Image>();
-        }
-
-        float timer = 0f;
-
-        // Плавная анимация появления меню и исчезновения черного экрана
-        while (timer < fadeTime)
-        {
-            float progress = timer / fadeTime;
-
-            // Управляем прозрачностью черного экрана
-            if (blackScreenImage != null)
-            {
-                blackScreenImage.color = new Color(0, 0, 0, 1 - progress);
-            }
-
-            // Управляем прозрачностью меню
-            if (menuCanvasGroup != null)
-            {
-                menuCanvasGroup.alpha = progress;
-            }
-
-            timer += Time.deltaTime;
-            yield return null;
-        }
-
-        // Завершаем анимацию
-        FinishMenuShowAnimation(blackScreen);
-    }
-
-    private void FinishMenuShowAnimation(GameObject blackScreen)
-    {
-        Debug.Log("MainMenuController: Завершаем анимацию");
-
-        // Удаляем черный экран
-        if (blackScreen != null)
-        {
-            Destroy(blackScreen);
-        }
-
-        // Активируем меню
-        if (menuCanvasGroup != null)
-        {
-            menuCanvasGroup.alpha = 1;
-            menuCanvasGroup.interactable = true;
-            menuCanvasGroup.blocksRaycasts = true;
-        }
-    }
-
     private void ShowMenuInstantly()
     {
-        Debug.Log("MainMenuController: Мгновенное отображение меню");
+        Debug.Log("Мгновенное отображение меню");
 
-        // Мгновенное отображение меню (если нет черного экрана)
         if (menuCanvasGroup != null)
         {
             menuCanvasGroup.alpha = 1;
@@ -217,12 +192,11 @@ public class MainMenuController : MonoBehaviour
     // Статический метод для загрузки главного меню из других сцен
     public static void LoadMainMenuFromOtherScene()
     {
-        Debug.Log("MainMenuController: Загрузка главного меню из другой сцены");
-        cameFromIntroVideo = false; // Указываем, что мы НЕ из видео
+        Debug.Log("Загрузка главного меню из другой сцены");
         SceneManager.LoadScene("MainMenu");
     }
 
-    // Методы загрузки сцен с проверкой существования
+    // Методы загрузки сцен
     private void LoadLecturesScene()
     {
         LoadSceneWithValidation(lecturesSceneName, "лекций");
@@ -236,6 +210,11 @@ public class MainMenuController : MonoBehaviour
     private void LoadPreparationScene()
     {
         LoadSceneWithValidation(preparationSceneName, "подготовки к ОКР");
+    }
+
+    public void LoadSettingsScene()
+    {
+        LoadSceneWithValidation(settingsSceneName, "настроек");
     }
 
     private void LoadSceneWithValidation(string sceneName, string sceneDescription)
@@ -317,7 +296,6 @@ public class MainMenuController : MonoBehaviour
 
     private void OnExitClick()
     {
-        // Выход из приложения
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else
@@ -327,7 +305,6 @@ public class MainMenuController : MonoBehaviour
 
     private void OnDestroy()
     {
-        // Отписываемся от событий для предотвращения утечек памяти
         lecturesButton?.onClick.RemoveAllListeners();
         miniGamesButton?.onClick.RemoveAllListeners();
         preparationButton?.onClick.RemoveAllListeners();

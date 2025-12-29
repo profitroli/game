@@ -123,10 +123,9 @@ public class LecturesController : MonoBehaviour
         SceneManager.LoadScene("Lecture 14");
     }
 
-    void ReturnToMainMenu()
+    public void ReturnToMainMenu()
     {
-        // ¬озврат в главное меню без затемнени€
-        SceneManager.LoadScene("MainMenu");
+        MainMenuController.LoadMainMenuFromOtherScene();
     }
 
     void GoToMiniGames()

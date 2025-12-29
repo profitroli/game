@@ -94,6 +94,12 @@ public class ButtonManager : MonoBehaviour
         // Убедитесь, что сцена "PreparationScene" добавлена в Build Settings
         SceneManager.LoadScene("Test1");
     }
+
+    public void LoadLevelByName(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
+
     /*// Метод для перехода на сцену подготовки
     public void Load()
     {
