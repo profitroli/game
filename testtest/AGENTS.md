@@ -2,7 +2,7 @@
 - Project name: testtest
 - Unity version: Unity 6000.3.0f1
 - Active game object:
-  - Name: GameMananger
+  - Name: Button (2)
   - Tag: Untagged
-  - Layer: Default
+  - Layer: UI
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

@@ -56,7 +56,7 @@ public class CrosswordManager : MonoBehaviour
                 cell.image.color = Color.white;
             }
         }
-        resultText.text = "Разгадайте кроссворд";
+        resultText.text = "Разгадайте кроссворд, вопросы в указателях";
         resultText.color = Color.black;
     }
     public void LoadLevelByName(string sceneName)
