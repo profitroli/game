@@ -9,6 +9,10 @@ public class IntroVideoController : MonoBehaviour
     [SerializeField] private VideoPlayer videoPlayer;
     [SerializeField] private RawImage videoDisplay;
 
+    [Header("НАСТРОЙКИ АУДИО")]
+    [SerializeField] private AudioSource audioSource; // AudioSource для воспроизведения звука видео
+    [SerializeField] private float videoVolume = 1f; // Громкость видео
+
     [Header("ЭЛЕМЕНТЫ ИНТЕРФЕЙСА")]
     [SerializeField] private Button skipButton;
     [SerializeField] private Text loadingText;
@@ -37,6 +41,9 @@ public class IntroVideoController : MonoBehaviour
         // Настройка интерфейса
         SetupUI();
 
+        // Настройка аудио
+        SetupAudio();
+
         // Настройка событий видео
         SetupVideoEvents();
 
@@ -53,6 +60,19 @@ public class IntroVideoController : MonoBehaviour
         if (videoDisplay == null)
             videoDisplay = FindObjectOfType<RawImage>();
 
+        if (audioSource == null)
+        {
+            // Пытаемся найти существующий AudioSource на этом же GameObject
+            audioSource = GetComponent<AudioSource>();
+
+            // Если не нашли, создаем новый
+            if (audioSource == null)
+            {
+                audioSource = gameObject.AddComponent<AudioSource>();
+                Debug.Log("Создан новый AudioSource");
+            }
+        }
+
         if (skipButton == null && skipButtonObject != null)
             skipButton = skipButtonObject.GetComponent<Button>();
 
@@ -63,6 +83,30 @@ public class IntroVideoController : MonoBehaviour
         {
             // Создаем объект для затемнения если его нет
             CreateFadeImage();
+        }
+    }
+
+    void SetupAudio()
+    {
+        if (audioSource == null)
+        {
+            Debug.LogError("AudioSource не найден!");
+            return;
+        }
+
+        // Настраиваем AudioSource
+        audioSource.volume = videoVolume;
+        audioSource.spatialBlend = 0; // 2D звук
+        audioSource.playOnAwake = false;
+        audioSource.loop = false;
+
+        // Настраиваем VideoPlayer для использования этого AudioSource
+        if (videoPlayer != null)
+        {
+            videoPlayer.audioOutputMode = VideoAudioOutputMode.AudioSource;
+            videoPlayer.SetTargetAudioSource(0, audioSource); // Используем аудиодорожку 0
+            videoPlayer.controlledAudioTrackCount = 1; // Используем одну аудиодорожку
+            videoPlayer.EnableAudioTrack(0, true); // Включаем аудиодорожку
         }
     }
 
@@ -134,6 +178,9 @@ public class IntroVideoController : MonoBehaviour
 
             // Событие: видео началось
             videoPlayer.started += OnVideoStarted;
+
+            // Событие: ошибка при загрузке видео
+            videoPlayer.errorReceived += OnVideoError;
         }
         else
         {
@@ -203,7 +250,15 @@ public class IntroVideoController : MonoBehaviour
         }
 
         isVideoPrepared = true;
+
+        // Запускаем видео и звук
         videoPlayer.Play();
+
+        // Проверяем, что AudioSource начал воспроизводиться
+        if (audioSource != null && !audioSource.isPlaying)
+        {
+            audioSource.Play();
+        }
     }
 
     void OnVideoPrepared(VideoPlayer vp)
@@ -224,10 +279,29 @@ public class IntroVideoController : MonoBehaviour
         Debug.Log("Видео началось");
     }
 
+    void OnVideoError(VideoPlayer vp, string message)
+    {
+        Debug.LogError($"Ошибка видео: {message}");
+
+        // Если есть ошибка с видео, продолжаем без него
+        if (loadingText != null)
+        {
+            loadingText.text = "ОШИБКА ВИДЕО. ПЕРЕХОДИМ В ГЛАВНОЕ МЕНЮ...";
+        }
+
+        StartCoroutine(FadeAndLoadScene());
+    }
+
     void OnVideoFinished(VideoPlayer vp)
     {
         Debug.Log("Видео завершено!");
         isVideoFinished = true;
+
+        // Останавливаем аудио
+        if (audioSource != null && audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
 
         // Запускаем переход в главное меню
         LoadMainMenu();
@@ -244,6 +318,12 @@ public class IntroVideoController : MonoBehaviour
             if (videoPlayer != null && videoPlayer.isPlaying)
             {
                 videoPlayer.Stop();
+            }
+
+            // Останавливаем аудио
+            if (audioSource != null && audioSource.isPlaying)
+            {
+                audioSource.Stop();
             }
 
             // Загружаем главное меню
@@ -270,12 +350,21 @@ public class IntroVideoController : MonoBehaviour
         // Плавное затемнение (Fade Out)
         float elapsedTime = 0f;
 
+        // Плавно уменьшаем громкость видео при переходе
+        float initialVolume = audioSource != null ? audioSource.volume : 0f;
+
         while (elapsedTime < fadeDuration)
         {
             if (fadeImage != null)
             {
                 float alpha = Mathf.Lerp(0, 1, elapsedTime / fadeDuration);
                 fadeImage.color = new Color(0, 0, 0, alpha);
+            }
+
+            // Плавно уменьшаем громкость звука
+            if (audioSource != null)
+            {
+                audioSource.volume = Mathf.Lerp(initialVolume, 0, elapsedTime / fadeDuration);
             }
 
             elapsedTime += Time.deltaTime;
@@ -287,10 +376,34 @@ public class IntroVideoController : MonoBehaviour
             fadeImage.color = Color.black;
         }
 
+        // Полностью выключаем звук
+        if (audioSource != null)
+        {
+            audioSource.volume = 0f;
+            audioSource.Stop();
+        }
+
         Debug.Log("Загружаю сцену: " + nextSceneName);
 
         // Загрузка главного меню
         SceneManager.LoadScene(nextSceneName);
+    }
+
+    // Метод для настройки громкости (можно вызвать из других скриптов)
+    public void SetVideoVolume(float volume)
+    {
+        videoVolume = Mathf.Clamp01(volume);
+
+        if (audioSource != null)
+        {
+            audioSource.volume = videoVolume;
+        }
+    }
+
+    // Метод для получения текущей громкости
+    public float GetVideoVolume()
+    {
+        return videoVolume;
     }
 
     void OnDestroy()
@@ -301,6 +414,7 @@ public class IntroVideoController : MonoBehaviour
             videoPlayer.loopPointReached -= OnVideoFinished;
             videoPlayer.prepareCompleted -= OnVideoPrepared;
             videoPlayer.started -= OnVideoStarted;
+            videoPlayer.errorReceived -= OnVideoError;
         }
 
         // Очищаем события кнопки

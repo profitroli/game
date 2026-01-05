@@ -1914,7 +1914,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -420, y: 251.98}
+  m_AnchoredPosition: {x: -420, y: 255.17}
   m_SizeDelta: {x: 100, y: 55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &457574302
@@ -3547,8 +3547,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0033875, y: -1456.3627}
-  m_SizeDelta: {x: 972.66, y: 3501.038}
+  m_AnchoredPosition: {x: 0.001255, y: -1456.3627}
+  m_SizeDelta: {x: 1009.5, y: 3501.038}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &853443226
 MonoBehaviour:
@@ -4007,8 +4007,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 254.17001}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 0, y: 255.17}
+  m_SizeDelta: {x: 226, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &913460681
 MonoBehaviour:
@@ -5236,7 +5236,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -179.974}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 420, y: 254.17}
+  m_AnchoredPosition: {x: 420, y: 255.17}
   m_SizeDelta: {x: 100, y: 55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1111312292
@@ -5534,7 +5534,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 987.34, y: 598}
+  m_ReferenceResolution: {x: 987, y: 598}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0.425
   m_PhysicalUnit: 3
@@ -8912,8 +8912,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 254.17}
-  m_SizeDelta: {x: 0, y: -508.34}
+  m_AnchoredPosition: {x: 0, y: 257}
+  m_SizeDelta: {x: 0, y: -506}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1982021726
 MonoBehaviour:
@@ -9184,7 +9184,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0.0017089844}
-  m_SizeDelta: {x: 0, y: 0.003418}
+  m_SizeDelta: {x: 0, y: 0.0034}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2050945875
 MonoBehaviour:
@@ -9241,6 +9241,8 @@ MonoBehaviour:
   maxYPosition: 2900
   invertScrollDirection: 1
   showDebugBounds: 1
+  savePosition: 1
+  saveKey: 1
 --- !u!1 &2088888752
 GameObject:
   m_ObjectHideFlags: 0

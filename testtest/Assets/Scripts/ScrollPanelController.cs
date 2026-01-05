@@ -22,6 +22,13 @@ public class ScrollPanelController : MonoBehaviour, IScrollHandler
     [Tooltip("Показывать границы при движении?")]
     [SerializeField] private bool showDebugBounds = true;
 
+    [Header("Сохранение позиции")]
+    [Tooltip("Сохранять позицию при переключении сцен/страниц?")]
+    [SerializeField] private bool savePosition = true;
+
+    [Tooltip("Уникальный ключ для сохранения позиции. Оставьте пустым для автоматической генерации")]
+    [SerializeField] private string saveKey = "";
+
     // Ссылка на RectTransform панели
     private RectTransform panelRectTransform;
 
@@ -38,11 +45,91 @@ public class ScrollPanelController : MonoBehaviour, IScrollHandler
         // Получаем компонент RectTransform
         panelRectTransform = GetComponent<RectTransform>();
 
-        // Сохраняем начальную позицию
-        currentPosition = panelRectTransform.localPosition;
+        // Генерируем ключ сохранения если не задан
+        if (string.IsNullOrEmpty(saveKey))
+        {
+            saveKey = GenerateSaveKey();
+        }
+
+        // Восстанавливаем сохраненную позицию или используем текущую
+        LoadSavedPosition();
 
         Debug.Log("Scroll Panel Controller инициализирован");
         Debug.Log($"Границы движения: от {minYPosition} до {maxYPosition}");
+        Debug.Log($"Ключ сохранения: {saveKey}");
+    }
+
+    void OnEnable()
+    {
+        // При повторной активации объекта (например, при возвращении на страницу)
+        // можно загрузить позицию снова
+        if (savePosition)
+        {
+            LoadSavedPosition();
+        }
+    }
+
+    void OnDisable()
+    {
+        // При деактивации объекта сохраняем позицию
+        if (savePosition)
+        {
+            SaveCurrentPosition();
+        }
+    }
+
+    void OnDestroy()
+    {
+        // При уничтожении объекта тоже сохраняем позицию
+        if (savePosition)
+        {
+            SaveCurrentPosition();
+        }
+    }
+
+    // Генерация уникального ключа для сохранения
+    private string GenerateSaveKey()
+    {
+        // Используем путь в иерархии для уникальности
+        string path = transform.GetPath();
+        return $"ScrollPanelPos_{path.GetHashCode()}";
+    }
+
+    // Сохранение текущей позиции
+    private void SaveCurrentPosition()
+    {
+        if (!savePosition) return;
+
+        PlayerPrefs.SetFloat(saveKey, currentPosition.y);
+        PlayerPrefs.Save();
+
+        Debug.Log($"Позиция сохранена: {currentPosition.y}");
+    }
+
+    // Загрузка сохраненной позиции
+    private void LoadSavedPosition()
+    {
+        if (!savePosition) return;
+
+        if (PlayerPrefs.HasKey(saveKey))
+        {
+            float savedY = PlayerPrefs.GetFloat(saveKey, 0);
+
+            // Ограничиваем сохраненное значение границами
+            savedY = Mathf.Clamp(savedY, minYPosition, maxYPosition);
+
+            // Применяем сохраненную позицию
+            currentPosition = panelRectTransform.localPosition;
+            currentPosition.y = savedY;
+            panelRectTransform.localPosition = currentPosition;
+
+            Debug.Log($"Позиция загружена: {savedY}");
+        }
+        else
+        {
+            // Если сохранения нет, используем текущую позицию
+            currentPosition = panelRectTransform.localPosition;
+        }
     }
 
     // Этот метод вызывается при прокрутке колесика мыши над объектом
@@ -72,6 +159,12 @@ public class ScrollPanelController : MonoBehaviour, IScrollHandler
         // Применяем новую позицию к панели
         panelRectTransform.localPosition = currentPosition;
 
+        // Автоматически сохраняем при изменении
+        if (savePosition)
+        {
+            SaveCurrentPosition();
+        }
+
         // Выводим отладочную информацию
         Debug.Log($"Прокрутка: {scrollDelta}, Движение: {movement}, Новая позиция Y: {currentPosition.y}");
     }
@@ -82,6 +175,13 @@ public class ScrollPanelController : MonoBehaviour, IScrollHandler
         currentPosition.y = 0;
         currentPosition.y = Mathf.Clamp(currentPosition.y, minYPosition, maxYPosition);
         panelRectTransform.localPosition = currentPosition;
+
+        // Сохраняем сброшенную позицию
+        if (savePosition)
+        {
+            SaveCurrentPosition();
+        }
+
         Debug.Log("Позиция панели сброшена");
     }
 
@@ -90,6 +190,12 @@ public class ScrollPanelController : MonoBehaviour, IScrollHandler
     {
         currentPosition.y = Mathf.Clamp(newYPosition, minYPosition, maxYPosition);
         panelRectTransform.localPosition = currentPosition;
+
+        // Сохраняем установленную позицию
+        if (savePosition)
+        {
+            SaveCurrentPosition();
+        }
     }
 
     // Метод для получения текущей позиции
@@ -102,6 +208,14 @@ public class ScrollPanelController : MonoBehaviour, IScrollHandler
     public float GetNormalizedPosition()
     {
         return Mathf.InverseLerp(minYPosition, maxYPosition, currentPosition.y);
+    }
+
+    // Метод для очистки сохраненной позиции
+    public void ClearSavedPosition()
+    {
+        PlayerPrefs.DeleteKey(saveKey);
+        PlayerPrefs.Save();
+        Debug.Log($"Сохраненная позиция очищена для ключа: {saveKey}");
     }
 
     // Визуализация границ в редакторе (только в режиме Play)
@@ -138,4 +252,16 @@ public class ScrollPanelController : MonoBehaviour, IScrollHandler
         Gizmos.DrawLine(bottomBoundary - Vector3.right * 200, bottomBoundary + Vector3.right * 200);
     }
 #endif
+}
+
+// Вспомогательный класс для получения пути GameObject
+public static class TransformExtensions
+{
+    public static string GetPath(this Transform current)
+    {
+        if (current.parent == null)
+            return "/" + current.name;
+
+        return current.parent.GetPath() + "/" + current.name;
+    }
 }

@@ -452,6 +452,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 520830819}
   m_CullTransparentMesh: 1
+--- !u!1 &610754826
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 610754827}
+  - component: {fileID: 610754828}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &610754827
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 610754826}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 600.07025, y: 355.39185, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &610754828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 610754826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f12e14f8ad8f9b469788a56c9c6ff0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioManager
+  backgroundMusic: {fileID: 8300000, guid: d7c502983d466c94484e262df73f67ba, type: 3}
+  musicVolume: 1
+  mainMenuSceneName: MainMenu
 --- !u!1 &620458225
 GameObject:
   m_ObjectHideFlags: 0
@@ -629,9 +676,6 @@ MonoBehaviour:
   miniGamesSceneName: GamesScene
   preparationSceneName: PreparationScene
   settingsSceneName: SettingsScene
-  mainMenuSceneName: MainMenu
-  blackScreenImage: {fileID: 0}
-  blackScreenObject: {fileID: 0}
 --- !u!4 &667597085
 Transform:
   m_ObjectHideFlags: 0
@@ -1424,9 +1468,6 @@ MonoBehaviour:
   miniGamesSceneName: GamesScene
   preparationSceneName: PreparationScene
   settingsSceneName: SettingsScene
-  mainMenuSceneName: MainMenu
-  blackScreenImage: {fileID: 0}
-  blackScreenObject: {fileID: 0}
 --- !u!114 &1627954413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2275,3 +2316,4 @@ SceneRoots:
   - {fileID: 823871362}
   - {fileID: 1964694057}
   - {fileID: 667597085}
+  - {fileID: 610754827}
