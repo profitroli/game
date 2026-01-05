@@ -15,7 +15,16 @@ public class SourceGameManager : MonoBehaviour
 
     public SourceItem[] sources;
     public TextMeshProUGUI statusText;
+    public string originalStatusText;
 
+    void Start()
+    {
+        // Запоминаем текст, который ты написала в Unity перед запуском
+        if (statusText != null)
+        {
+            originalStatusText = statusText.text;
+        }
+    }
     public void CheckAnswers()
     {
         int correct = 0;
@@ -40,7 +49,7 @@ public class SourceGameManager : MonoBehaviour
 
         if (filledCount < sources.Length)
         {
-            statusText.text = "Подпишите все источники!";
+            statusText.text = "Подпишите все картинки!";
             statusText.color = Color.white;
             return; // Прекращаем проверку
         }
@@ -81,7 +90,7 @@ public class SourceGameManager : MonoBehaviour
             item.inputField.text = "";
             item.inputField.image.color = Color.white;
         }
-        statusText.text = "Подпишите виды источников";
+        statusText.text = originalStatusText;
         statusText.color = Color.black;
     }
 }

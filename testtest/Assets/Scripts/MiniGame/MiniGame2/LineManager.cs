@@ -17,7 +17,16 @@ public class LineManager : MonoBehaviour
 
     private GameObject currentLine;
     private ConnectionDot startDot;
+    public string originalStatusText;
 
+    void Start()
+    {
+        // Запоминаем текст, который ты написала в Unity перед запуском
+        if (statusText != null)
+        {
+            originalStatusText = statusText.text;
+        }
+    }
     // Списки для хранения данных о созданных соединениях
     private List<GameObject> activeLines = new List<GameObject>();
     private List<KeyValuePair<ConnectionDot, ConnectionDot>> connections = new List<KeyValuePair<ConnectionDot, ConnectionDot>>();
@@ -111,8 +120,7 @@ public class LineManager : MonoBehaviour
     /// </summary>
     public void CheckResults()
     {
-        if (statusText == null)
-            statusText.text = "Соотнесите периоды и их символы" ;
+ 
 
         if (connections.Count == 0)
         {
@@ -123,7 +131,7 @@ public class LineManager : MonoBehaviour
 
         if (connections.Count < totalConnectionsNeeded)
         {
-            statusText.text = "Соедините все этапы!";
+            statusText.text = "Соедините все части!";
             statusText.color = Color.white;
             return;
         }
@@ -140,7 +148,7 @@ public class LineManager : MonoBehaviour
 
         if (correctCount == totalConnectionsNeeded)
         {
-            statusText.text = "Молодец!!";
+            statusText.text = "Молодец!!Всё правильно!";
             statusText.color = Color.green;
         }
         else
@@ -164,7 +172,7 @@ public class LineManager : MonoBehaviour
         activeLines.Clear();
         connections.Clear();
 
-        if (statusText != null) { statusText.text = "Соотнесите периоды и их символы"; statusText.color = Color.black; }
+        if (statusText != null) { statusText.text = originalStatusText; statusText.color = Color.black; }
     }
 
     /// <summary>

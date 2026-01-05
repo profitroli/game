@@ -14,6 +14,16 @@ public class TrueFalseManager : MonoBehaviour
 
     public List<QuestionData> questions;
     public TextMeshProUGUI statusText;
+    public string originalStatusText;
+
+    void Start()
+    {
+        // Запоминаем текст, который ты написала в Unity перед запуском
+        if (statusText != null)
+        {
+            originalStatusText = statusText.text;
+        }
+    }
 
     public void CheckAllAnswers()
     {
@@ -56,7 +66,7 @@ public class TrueFalseManager : MonoBehaviour
     public void ResetGame()
     {
         foreach (var q in questions) q.toggleBtn.ResetButton();
-        statusText.text = "Крещение Руси: верны ли утверждения?";
+        statusText.text = originalStatusText;
         statusText.color = Color.black;
     }
 }

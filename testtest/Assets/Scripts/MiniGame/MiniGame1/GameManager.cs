@@ -6,8 +6,17 @@ public class GameManager : MonoBehaviour
 {
     public DropZone[] zones;
     public TextMeshProUGUI statusText;
-    public int totalCountries = 8; // Укажи здесь общее количество стран в игре
+    public int totalCountries; // Укажи здесь общее количество стран в игре
+    public string originalStatusText;
 
+    void Start()
+    {
+        // Запоминаем текст, который ты написала в Unity перед запуском
+        if (statusText != null)
+        {
+            originalStatusText = statusText.text;
+        }
+    }
     public void CheckResult()
     {
         int placedItemsCount = 0;
@@ -29,7 +38,7 @@ public class GameManager : MonoBehaviour
         // 2. Проверяем условия
         if (placedItemsCount == 0)
         {
-            statusText.text = "Сначала распредели страны!";
+            statusText.text = "Сначала распредели!";
             statusText.color = Color.purple;
         }
         else if (placedItemsCount < totalCountries)
@@ -58,6 +67,7 @@ public class GameManager : MonoBehaviour
         {
             card.ResetCard();
         }
-        statusText.text = ""; // Очищаем текст
+        statusText.text = originalStatusText;
+        statusText.color = Color.black;// Очищаем текст
     }
 }

@@ -159,9 +159,6 @@ MonoBehaviour:
   miniGamesSceneName: GamesScene
   preparationSceneName: PreparationScene
   settingsSceneName: SettingsScene
-  mainMenuSceneName: MainMenu
-  blackScreenImage: {fileID: 0}
-  blackScreenObject: {fileID: 0}
 --- !u!4 &47001731
 Transform:
   m_ObjectHideFlags: 0
@@ -6119,7 +6116,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 971.34, y: 589}
+  m_ReferenceResolution: {x: 987.34, y: 589}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0.646
   m_PhysicalUnit: 3
