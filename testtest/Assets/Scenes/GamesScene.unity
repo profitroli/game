@@ -3478,6 +3478,7 @@ CanvasRenderer:
   m_GameObject: {fileID: 482662995}
   m_CullTransparentMesh: 1
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 --- !u!1 &495186851
 GameObject:
   m_ObjectHideFlags: 0
@@ -3599,6 +3600,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 495186851}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 --- !u!1 &500649285
@@ -7304,6 +7307,7 @@ CanvasRenderer:
   m_GameObject: {fileID: 998321886}
   m_CullTransparentMesh: 1
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 --- !u!1 &1012149089
 GameObject:
   m_ObjectHideFlags: 0
@@ -7425,6 +7429,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1012149089}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 --- !u!1 &1023163306
@@ -10957,6 +10963,7 @@ CanvasRenderer:
   m_GameObject: {fileID: 1431956317}
   m_CullTransparentMesh: 1
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 --- !u!1 &1456510772
 GameObject:
   m_ObjectHideFlags: 0
@@ -11078,6 +11085,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1456510772}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 --- !u!1 &1458215827
@@ -12665,6 +12674,7 @@ CanvasRenderer:
   m_GameObject: {fileID: 1660697150}
   m_CullTransparentMesh: 1
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 --- !u!1 &1676944656
 GameObject:
   m_ObjectHideFlags: 0
@@ -12786,6 +12796,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1676944656}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 --- !u!1 &1682015650
@@ -14488,6 +14500,7 @@ CanvasRenderer:
   m_GameObject: {fileID: 1909757989}
   m_CullTransparentMesh: 1
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 --- !u!1 &1952053538
 GameObject:
   m_ObjectHideFlags: 0
@@ -14684,6 +14697,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1988117260}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 --- !u!1 &2006628415
