@@ -788,8 +788,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 220.04022, y: -158.9667}
-  m_SizeDelta: {x: 523.27, y: 91.611}
+  m_AnchoredPosition: {x: 220.04022, y: -161.84}
+  m_SizeDelta: {x: 523.27, y: 79.1846}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &440377817
 MonoBehaviour:
@@ -839,8 +839,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 35
+  m_fontSizeBase: 35
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -906,6 +906,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MatchTextItem
   id: 3
   isLeftColumn: 0
+  originalPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &443779729
 GameObject:
   m_ObjectHideFlags: 0
@@ -1078,8 +1079,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 206.09023, y: -11.611704}
-  m_SizeDelta: {x: 495.38, y: 87.7166}
+  m_AnchoredPosition: {x: 206.09023, y: -6.4414}
+  m_SizeDelta: {x: 495.38, y: 37.417}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &477027658
 MonoBehaviour:
@@ -1128,8 +1129,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 35
+  m_fontSizeBase: 35
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1195,6 +1196,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MatchTextItem
   id: 4
   isLeftColumn: 0
+  originalPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &495087368
 GameObject:
   m_ObjectHideFlags: 0
@@ -1367,7 +1369,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -315.9998, y: 55.229294}
+  m_AnchoredPosition: {x: -317.7, y: 63}
   m_SizeDelta: {x: 278.5995, y: 45.966}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &769655038
@@ -1417,8 +1419,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 35
+  m_fontSizeBase: 35
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1484,6 +1486,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MatchTextItem
   id: 2
   isLeftColumn: 1
+  originalPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &809078003
 GameObject:
   m_ObjectHideFlags: 0
@@ -1626,7 +1629,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 872616873}
-  - component: {fileID: 872616875}
   - component: {fileID: 872616876}
   m_Layer: 0
   m_Name: GameManager
@@ -1650,41 +1652,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &872616875
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 872616872}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5ada4ee9ad347c4abca360674bef169, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MatchTextManager
-  matchEntries:
-  - pairID: 1
-    dateText: {fileID: 1105332342}
-    eventText: {fileID: 1607650095}
-    selectedEventID: 
-  - pairID: 2
-    dateText: {fileID: 769655038}
-    eventText: {fileID: 939844837}
-    selectedEventID: 
-  - pairID: 3
-    dateText: {fileID: 942815248}
-    eventText: {fileID: 440377817}
-    selectedEventID: 
-  - pairID: 4
-    dateText: {fileID: 1177895326}
-    eventText: {fileID: 477027658}
-    selectedEventID: 
-  - pairID: 5
-    dateText: {fileID: 1400780705}
-    eventText: {fileID: 926743646}
-    selectedEventID: 
-  statusText: {fileID: 2446486}
-  checkButton: {fileID: 0}
 --- !u!114 &872616876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1808,7 +1775,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 220.04022, y: -60.859707}
+  m_AnchoredPosition: {x: 220.04022, y: -90.29706}
   m_SizeDelta: {x: 523.27, y: 83.968}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &926743646
@@ -1859,8 +1826,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 35
+  m_fontSizeBase: 35
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1926,6 +1893,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MatchTextItem
   id: 5
   isLeftColumn: 0
+  originalPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &939844835
 GameObject:
   m_ObjectHideFlags: 0
@@ -1961,7 +1929,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 220.04022, y: 66.066895}
+  m_AnchoredPosition: {x: 220.04022, y: 63}
   m_SizeDelta: {x: 523.2719, y: 45.9031}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &939844837
@@ -2011,8 +1979,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 35
+  m_fontSizeBase: 35
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2078,6 +2046,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MatchTextItem
   id: 2
   isLeftColumn: 0
+  originalPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &942815246
 GameObject:
   m_ObjectHideFlags: 0
@@ -2113,7 +2082,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -315.9998, y: -12.152916}
+  m_AnchoredPosition: {x: -315.9998, y: -6.4414}
   m_SizeDelta: {x: 278.5995, y: 47.1492}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &942815248
@@ -2163,8 +2132,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 35
+  m_fontSizeBase: 35
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2230,6 +2199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MatchTextItem
   id: 3
   isLeftColumn: 1
+  originalPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &1075020953
 GameObject:
   m_ObjectHideFlags: 0
@@ -2394,8 +2364,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 35
+  m_fontSizeBase: 35
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2461,6 +2431,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MatchTextItem
   id: 1
   isLeftColumn: 1
+  originalPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &1177895324
 GameObject:
   m_ObjectHideFlags: 0
@@ -2496,7 +2467,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -315.9998, y: -79.15692}
+  m_AnchoredPosition: {x: -317.70026, y: -90.29706}
   m_SizeDelta: {x: 278.5995, y: 47.3739}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1177895326
@@ -2546,8 +2517,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 35
+  m_fontSizeBase: 35
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2613,6 +2584,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MatchTextItem
   id: 4
   isLeftColumn: 1
+  originalPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &1248142826
 GameObject:
   m_ObjectHideFlags: 0
@@ -2705,7 +2677,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Lecture 5
+          m_StringArgument: Lecture 7
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1248142829
@@ -2781,7 +2753,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -315.9998, y: -147.275}
+  m_AnchoredPosition: {x: -315.9998, y: -161.84}
   m_SizeDelta: {x: 278.5995, y: 50.0508}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1400780705
@@ -2831,8 +2803,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 35
+  m_fontSizeBase: 35
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2898,6 +2870,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MatchTextItem
   id: 5
   isLeftColumn: 1
+  originalPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &1524453766
 GameObject:
   m_ObjectHideFlags: 0
@@ -3204,7 +3177,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 206.10022, y: 128.7033}
+  m_AnchoredPosition: {x: 206.10022, y: 127}
   m_SizeDelta: {x: 495.382, y: 44.556}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1607650095
@@ -3255,8 +3228,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 35
+  m_fontSizeBase: 35
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3322,6 +3295,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MatchTextItem
   id: 1
   isLeftColumn: 0
+  originalPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &1825761980
 GameObject:
   m_ObjectHideFlags: 0

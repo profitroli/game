@@ -4,10 +4,14 @@ using UnityEngine.EventSystems;
 
 public class MatchTextItem : MonoBehaviour, IPointerClickHandler
 {
-    public string id; // Например, "1915"
-    public bool isLeftColumn; // true для дат, false для событий
+    public string id;
+    public bool isLeftColumn;
+    [HideInInspector] public Vector3 originalPosition;
+
     private MatchTextManage manager;
     private TextMeshProUGUI textMesh;
+
+    void Awake() => originalPosition = transform.localPosition;
 
     void Start()
     {

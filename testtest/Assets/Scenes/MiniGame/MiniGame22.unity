@@ -263,6 +263,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MatchTextItem
   id: 2
   isLeftColumn: 1
+  originalPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &301840979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -535,7 +536,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 201.72, y: 125.29}
+  m_AnchoredPosition: {x: 201.72, y: 127}
   m_SizeDelta: {x: 532.59, y: 44.556}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &461087276
@@ -552,6 +553,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MatchTextItem
   id: 5
   isLeftColumn: 0
+  originalPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &461087277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1322,6 +1324,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MatchTextItem
   id: 4
   isLeftColumn: 1
+  originalPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &730861534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1474,6 +1477,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MatchTextItem
   id: 1
   isLeftColumn: 1
+  originalPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &824160434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1626,6 +1630,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MatchTextItem
   id: 3
   isLeftColumn: 1
+  originalPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &829646760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2110,7 +2115,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 213.21, y: 55.198}
+  m_AnchoredPosition: {x: 213.21, y: 55.22929}
   m_SizeDelta: {x: 555.56, y: 45.9031}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &976782365
@@ -2127,6 +2132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MatchTextItem
   id: 1
   isLeftColumn: 0
+  originalPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &976782366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2551,6 +2557,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MatchTextItem
   id: 5
   isLeftColumn: 1
+  originalPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &1503841312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2686,7 +2693,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 201.43, y: -158.29}
+  m_AnchoredPosition: {x: 201.43, y: -147.275}
   m_SizeDelta: {x: 523.27, y: 91.611}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1560348503
@@ -2703,6 +2710,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MatchTextItem
   id: 4
   isLeftColumn: 0
+  originalPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &1560348504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3110,7 +3118,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 197.07, y: -76.42993}
+  m_AnchoredPosition: {x: 197.07, y: -79.15692}
   m_SizeDelta: {x: 523.27, y: 52.828}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1663901095
@@ -3127,6 +3135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MatchTextItem
   id: 3
   isLeftColumn: 0
+  originalPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &1663901096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3236,7 +3245,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1837819894}
-  - component: {fileID: 1837819893}
   - component: {fileID: 1837819892}
   m_Layer: 0
   m_Name: GameManager (1)
@@ -3258,41 +3266,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MatchTextManage
   statusText: {fileID: 522910689}
---- !u!114 &1837819893
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1837819891}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5ada4ee9ad347c4abca360674bef169, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MatchTextManager
-  matchEntries:
-  - pairID: 1
-    dateText: {fileID: 824160434}
-    eventText: {fileID: 976782366}
-    selectedEventID: 
-  - pairID: 2
-    dateText: {fileID: 301840979}
-    eventText: {fileID: 2122223190}
-    selectedEventID: 
-  - pairID: 3
-    dateText: {fileID: 829646760}
-    eventText: {fileID: 1663901096}
-    selectedEventID: 
-  - pairID: 4
-    dateText: {fileID: 730861534}
-    eventText: {fileID: 1560348504}
-    selectedEventID: 
-  - pairID: 5
-    dateText: {fileID: 1503841312}
-    eventText: {fileID: 461087277}
-    selectedEventID: 
-  statusText: {fileID: 522910689}
-  checkButton: {fileID: 0}
 --- !u!4 &1837819894
 Transform:
   m_ObjectHideFlags: 0
@@ -3480,7 +3453,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 183.12, y: -12.153}
+  m_AnchoredPosition: {x: 183.12, y: -12.15292}
   m_SizeDelta: {x: 495.38, y: 47.149}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2122223189
@@ -3497,6 +3470,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MatchTextItem
   id: 2
   isLeftColumn: 0
+  originalPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &2122223190
 MonoBehaviour:
   m_ObjectHideFlags: 0
