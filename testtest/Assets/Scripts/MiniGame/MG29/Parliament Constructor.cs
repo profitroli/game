@@ -27,7 +27,15 @@ public class ParliamentConstructor : MonoBehaviour
     }
 
     public void CheckResults()
-    {
+    {// 1. Сначала проверяем, все ли слоты заполнены
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i].currentIndex == -1)
+            {
+                statusText.text = "<color=black>Сначала выберите значения во всех пустых квадратах!</color>";
+                return; // Прерываем выполнение метода, проверка не начнется
+            }
+        }
         int correctCount = 0;
 
         for (int i = 0; i < slots.Length; i++)
@@ -46,12 +54,18 @@ public class ParliamentConstructor : MonoBehaviour
         if (correctCount == slots.Length)
         {
             statusText.text = "Правильно! Парламент сформирован верно.";
+            statusText.color = Color.green;
         }
         else
         {
             statusText.text = $"Ошибки в схеме! Верно: {correctCount} из {slots.Length}";
+            statusText.color = Color.red;
         }
     }
 
+    public void LoadLevelByName(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
     public void Restart() => SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 }
