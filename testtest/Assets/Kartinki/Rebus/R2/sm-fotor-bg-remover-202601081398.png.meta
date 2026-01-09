@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: db393b7238958ca4bafe2b40a2eee3c3
+guid: 1115ac30d49d1654abb2cee390f93db2
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6884102542667876655
-    second: cartoon-white-color-paint-paint-bucket-painting-paint-grey-brown-brush-30519762-fotor-bg-remover-2026010612119_0
-  - first:
-      213: -7840783281045016184
-    second: cartoon-white-color-paint-paint-bucket-painting-paint-grey-brown-brush-30519762-fotor-bg-remover-2026010612119_1
+      213: 5295672967914896685
+    second: sm-fotor-bg-remover-202601081398_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -116,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: cartoon-white-color-paint-paint-bucket-painting-paint-grey-brown-brush-30519762-fotor-bg-remover-2026010612119_0
+      name: sm-fotor-bg-remover-202601081398_0
       rect:
         serializedVersion: 2
-        x: 182
-        y: 255
-        width: 213
-        height: 192
+        x: 12
+        y: 43
+        width: 488
+        height: 408
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,30 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1d6fae20631c670a0800000000000000
-      internalID: -6884102542667876655
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: cartoon-white-color-paint-paint-bucket-painting-paint-grey-brown-brush-30519762-fotor-bg-remover-2026010612119_1
-      rect:
-        serializedVersion: 2
-        x: 75
-        y: 11
-        width: 207
-        height: 238
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 8817d7ce521ff2390800000000000000
-      internalID: -7840783281045016184
+      spriteID: d2db433b1820e7940800000000000000
+      internalID: 5295672967914896685
       vertices: []
       indices: 
       edges: []
@@ -173,8 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      cartoon-white-color-paint-paint-bucket-painting-paint-grey-brown-brush-30519762-fotor-bg-remover-2026010612119_0: -6884102542667876655
-      cartoon-white-color-paint-paint-bucket-painting-paint-grey-brown-brush-30519762-fotor-bg-remover-2026010612119_1: -7840783281045016184
+      sm-fotor-bg-remover-202601081398_0: 5295672967914896685
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
