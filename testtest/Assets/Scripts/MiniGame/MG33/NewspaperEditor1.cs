@@ -91,7 +91,7 @@ public class NewspaperEditor1 : MonoBehaviour
 
         if (correctCount == slots.Count)
         {
-            resultVerdictText.text = "нднапемн й оевюрх!";
+            resultVerdictText.text = "бхгхрйю нднапемю!";
             resultVerdictText.color = Color.green;
         }
         else
