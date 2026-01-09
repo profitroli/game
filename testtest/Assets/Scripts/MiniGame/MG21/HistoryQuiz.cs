@@ -15,14 +15,26 @@ public class HistoryQuiz : MonoBehaviour
     public List<HistoryItem> questions; // Список всех событий
     public TextMeshProUGUI eventDisplay; // Ссылка на текст на карточке
     public TextMeshProUGUI resultDisplay; // Ссылка на статус (Верно/Ошибка)
+    public GameObject finishPanel;       // Окно финиша (панель)
+    public TextMeshProUGUI resultText;   // Итоговый текст на панели
 
+    public float speed = 250f;
     private int currentIndex = 0;
 
     void Start()
     {
         ShowNextQuestion();
     }
+    void FinishGame()
+    {
 
+        if (finishPanel != null)
+        {
+            finishPanel.SetActive(true); // Включаем окно финиша
+            resultText.text = $"ФИНИШ! Хороший результат, продолжай изучать!";
+        }
+
+    }
     // Эту функцию вызываем при нажатии кнопок
     public void SelectAnswer(bool userChoice)
     {
@@ -56,8 +68,7 @@ public class HistoryQuiz : MonoBehaviour
         }
         else
         {
-            eventDisplay.text = "ПОБЕДА!";
-            resultDisplay.text = "Вы изучили путь к независимости БССР!";
+            FinishGame();
         }
     }
 }

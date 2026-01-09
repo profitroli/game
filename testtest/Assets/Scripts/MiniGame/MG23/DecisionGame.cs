@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class DecisionGame : MonoBehaviour
 {
@@ -20,11 +21,23 @@ public class DecisionGame : MonoBehaviour
     public TextMeshProUGUI btnAText;
     public TextMeshProUGUI btnBText;
     public TextMeshProUGUI infoText;
+    public GameObject finishPanel;       // Окно финиша (панель)
+    public TextMeshProUGUI resultText;   // Итоговый текст на панели
 
+    public float speed = 250f;
     private int currentStep = 0;
 
     void Start() => ShowNode();
-
+    void FinishGame()
+    {
+        
+        if (finishPanel != null)
+        {
+            finishPanel.SetActive(true); // Включаем окно финиша
+            resultText.text = $"ФИНИШ! Хороший результат, продолжай изучать!";
+        }
+        
+    }
     public void MakeDecision(bool choiceA)
     {
         if (currentStep >= nodes.Count) return;
@@ -60,12 +73,7 @@ public class DecisionGame : MonoBehaviour
         }
         else
         {
-            infoText.text = "ПОБЕДА! Вы прошли путь развития независимой Беларуси.";
-            infoText.color = Color.green;
-            situationText.text = "";
-            btnAText.text = "";
-            btnBText.text = "";
-
+            FinishGame();
         }
     }
 }
