@@ -117,7 +117,7 @@ public class NewspaperEditor1 : MonoBehaviour
             s.slotButton.colors = cb;
         }
         if (publishButton != null) publishButton.interactable = false;
-        statusText.text = "¬ыберите материал и кликните по зоне в газете";
+        statusText.text = "¬ыберите материал и кликните по зоне визитки";
         statusText.color = Color.black;
     }
 }
