@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
         else if (placedItemsCount < totalCountries)
         {
             statusText.text = "Размести все карточки!";
-            statusText.color = Color.aquamarine;
+            statusText.color = Color.purple;
         }
         else
         {
