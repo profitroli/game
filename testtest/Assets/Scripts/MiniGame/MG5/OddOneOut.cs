@@ -60,7 +60,7 @@ public class OddOneOutManager : MonoBehaviour
         if (!allSelected)
         {
             statusText.text = "Выберите лишнее слово в каждой группе!";
-            statusText.color = Color.yellow;
+            statusText.color = Color.purple;
             return;
         }
 

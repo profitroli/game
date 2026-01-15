@@ -306,12 +306,12 @@ public class TestManager10 : MonoBehaviour
             // Проверяем ответ
             if (playerAnswerIndex == q.correctAnswerIndex)
             {
-                resultListBuilder.Append($"<color=#2ecc71><size=18>✓ Ваш ответ: {playerAnswerText}</size></color>\n");
+                resultListBuilder.Append($"<color=#27ae60><size=18>✓ Ваш ответ: {playerAnswerText}</size></color>\n");
             }
             else
             {
                 resultListBuilder.Append($"<color=#e74c3c><size=18>✗ Ваш ответ: {playerAnswerText}</size></color>\n");
-                resultListBuilder.Append($"<color=#2ecc71><size=18>Правильный ответ: {correctAnswerText}</size></color>\n");
+                resultListBuilder.Append($"<color=#27ae60><size=18>Правильный ответ: {correctAnswerText}</size></color>\n");
             }
 
             // Добавляем разделитель между вопросами (кроме последнего)

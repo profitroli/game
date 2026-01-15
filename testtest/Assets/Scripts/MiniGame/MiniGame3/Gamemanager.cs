@@ -50,7 +50,7 @@ public class SourceGameManager : MonoBehaviour
         if (filledCount < sources.Length)
         {
             statusText.text = "Подпишите все картинки!";
-            statusText.color = Color.white;
+            statusText.color = Color.purple;
             return; // Прекращаем проверку
         }
 

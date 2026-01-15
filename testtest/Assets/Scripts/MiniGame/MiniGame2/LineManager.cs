@@ -132,7 +132,7 @@ public class LineManager : MonoBehaviour
         if (connections.Count < totalConnectionsNeeded)
         {
             statusText.text = "Соедините все части!";
-            statusText.color = Color.white;
+            statusText.color = Color.black;
             return;
         }
 
