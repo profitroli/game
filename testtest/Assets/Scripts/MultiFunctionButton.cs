@@ -10,7 +10,7 @@ public class DoubleClickNavigation : MonoBehaviour, IPointerClickHandler, IPoint
 
     [Header("Настройки")]
     public GameObject tooltipText;
-    private float delay = 0.3f; // Окно ожидания второго клика
+    private float delay = 0.5f; // Окно ожидания второго клика
     private int tapCount = 0;
 
     public void OnPointerClick(PointerEventData eventData)
