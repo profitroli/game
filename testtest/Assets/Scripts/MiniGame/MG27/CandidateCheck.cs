@@ -65,7 +65,7 @@ public class CandidateCheck : MonoBehaviour
         if (playerApproved == profiles[currentIndex].isEligible)
         {
             score += 10;
-            StartCoroutine(ShowFeedback("Верно!", Color.green));
+            StartCoroutine(ShowFeedback("Верно!", Color.forestGreen));
         }
         else
         {

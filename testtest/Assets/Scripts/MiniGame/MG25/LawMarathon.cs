@@ -58,7 +58,7 @@ public class LawMarathon : MonoBehaviour
             if (facts[currentIndex].isTrue)
             {
                 score += 10;
-                ShowFeedback("Молодец! Правильно выбрал.", Color.green);
+                ShowFeedback("Молодец! Правильно выбрал.", Color.forestGreen);
             }
             else
             {
@@ -121,7 +121,7 @@ public class LawMarathon : MonoBehaviour
             finishPanel.SetActive(true); // Включаем окно финиша
 
             // Формируем похвалу в зависимости от очков
-            string praise = score > 35 ? "Ты настоящий эксперт в праве!" : "Хороший результат, продолжай изучать!";
+            string praise = score >= 35 ? "Ты настоящий эксперт в праве!" : "Хороший результат, продолжай изучать!";
             resultText.text = $"ФИНИШ!\nТвой итог: {score} очков.\n{praise}";
         }
         else

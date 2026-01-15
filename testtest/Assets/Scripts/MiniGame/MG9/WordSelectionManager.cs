@@ -73,8 +73,8 @@ public class WordSelectionManager : MonoBehaviour
 
         if (!hasErrors && correctSelected == totalRequired)
         {
-            statusText.text = "Верно! ВКЛ сохранило автономию, но монарх и сейм стали общими.";
-            statusText.color = Color.green;
+            statusText.text = "Верно! Вы хорошо разобрались в теме.";
+            statusText.color = Color.forestGreen;
         }
         else
         {

@@ -57,7 +57,7 @@ public class TrueFalseManager : MonoBehaviour
         }
 
         statusText.text = (correctCount == questions.Count) ? "Великолепно!" : $"Верно: {correctCount} из {questions.Count}";
-        statusText.color = Color.green;
+        statusText.color = Color.forestGreen;
     }
     public void LoadLevelByName(string sceneName)
     {

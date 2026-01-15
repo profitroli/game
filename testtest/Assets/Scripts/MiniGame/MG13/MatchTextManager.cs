@@ -105,7 +105,7 @@ public class MatchTextManage : MonoBehaviour
         if (correctCount == total)
         {
             statusText.text = "ВЕРНО! Отличная работа.";
-            statusText.color = Color.green;
+            statusText.color = Color.forestGreen;
         }
         else
         {

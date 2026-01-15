@@ -54,7 +54,7 @@ public class ParliamentConstructor : MonoBehaviour
         if (correctCount == slots.Length)
         {
             statusText.text = "Правильно! Парламент сформирован верно.";
-            statusText.color = Color.green;
+            statusText.color = Color.forestGreen;
         }
         else
         {

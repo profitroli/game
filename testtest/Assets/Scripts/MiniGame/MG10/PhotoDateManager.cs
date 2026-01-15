@@ -31,12 +31,12 @@ public class MultiDateManager : MonoBehaviour
             {
                 correctCount++;
                 // Подсвечиваем поле зеленым
-                entry.inputField.image.color = new Color(0.7f, 1f, 0.7f);
+                entry.inputField.image.color = Color.green;
             }
             else
             {
                 // Подсвечиваем поле красным
-                entry.inputField.image.color = new Color(1f, 0.7f, 0.7f);
+                entry.inputField.image.color = Color.red;
             }
         }
 
@@ -44,7 +44,7 @@ public class MultiDateManager : MonoBehaviour
         if (correctCount == dateEntries.Count)
         {
             statusText.text = "Отлично! Все даты указаны верно.";
-            statusText.color = Color.green;
+            statusText.color = Color.forestGreen;
         }
         else
         {

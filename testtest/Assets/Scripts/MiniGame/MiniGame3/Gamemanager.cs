@@ -71,7 +71,7 @@ public class SourceGameManager : MonoBehaviour
         if (correct == sources.Length)
         {
             statusText.text = "Все верно! Вы отличный историк!";
-            statusText.color = Color.green;
+            statusText.color = Color.forestGreen;
         }
         else
         {

@@ -51,7 +51,7 @@ public class EasyPuzzle : MonoBehaviour
         if (correctCount == slots.Count && wordOk)
         {
             resultText.text = "Молодец! Всё правильно";
-            resultText.color = Color.green;
+            resultText.color = Color.forestGreen;
         }
         else
         {

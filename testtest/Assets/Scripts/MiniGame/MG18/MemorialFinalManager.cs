@@ -66,7 +66,7 @@ public class MemorialFinalManager : MonoBehaviour
         if (score == blocks.Count)
         {
             statusText.text = "Молодец! Всё правильно";
-            statusText.color = Color.green;
+            statusText.color = Color.forestGreen;
         }
         else
         {

@@ -211,6 +211,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PrinceCard (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 6281177587965153048, guid: 97f921d467933ae45a81c2fc0a74d8b5, type: 3}
+      propertyPath: currentSlotID
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7999827122721465744, guid: 97f921d467933ae45a81c2fc0a74d8b5, type: 3}
       propertyPath: m_Type
       value: 0
@@ -949,6 +953,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PrinceCard (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6281177587965153048, guid: 97f921d467933ae45a81c2fc0a74d8b5, type: 3}
+      propertyPath: currentSlotID
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7999827122721465744, guid: 97f921d467933ae45a81c2fc0a74d8b5, type: 3}
       propertyPath: m_Type
       value: 0
@@ -1299,6 +1307,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PrinceCard (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6281177587965153048, guid: 97f921d467933ae45a81c2fc0a74d8b5, type: 3}
+      propertyPath: currentSlotID
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7999827122721465744, guid: 97f921d467933ae45a81c2fc0a74d8b5, type: 3}
       propertyPath: m_Type
       value: 0
@@ -1423,6 +1435,10 @@ PrefabInstance:
     - target: {fileID: 4913054288041311127, guid: 97f921d467933ae45a81c2fc0a74d8b5, type: 3}
       propertyPath: m_Name
       value: PrinceCard
+      objectReference: {fileID: 0}
+    - target: {fileID: 6281177587965153048, guid: 97f921d467933ae45a81c2fc0a74d8b5, type: 3}
+      propertyPath: currentSlotID
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7999827122721465744, guid: 97f921d467933ae45a81c2fc0a74d8b5, type: 3}
       propertyPath: m_Type
@@ -1824,6 +1840,10 @@ PrefabInstance:
     - target: {fileID: 4913054288041311127, guid: 97f921d467933ae45a81c2fc0a74d8b5, type: 3}
       propertyPath: m_Name
       value: PrinceCard (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6281177587965153048, guid: 97f921d467933ae45a81c2fc0a74d8b5, type: 3}
+      propertyPath: currentSlotID
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7999827122721465744, guid: 97f921d467933ae45a81c2fc0a74d8b5, type: 3}
       propertyPath: m_Sprite
@@ -2340,7 +2360,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "\u0420\u0430\u0441\u0441\u0442\u0430\u0432\u044C\u0442\u0435 \u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u043E
-    \u0440\u043E\u0434\u0441\u0442\u0432\u0435\u043D\u043D\u044B\u0435 \u0441\u0432\u044F\u0437\u0438 "
+    \u0440\u043E\u0434\u0441\u0442\u0432\u0435\u043D\u043D\u044B\u0435 \u0441\u0432\u044F\u0437\u0438
+    (\u043F\u043E \u0430\u043B\u0444\u0430\u0432\u0438\u0442\u0443) "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2605,17 +2626,17 @@ MonoBehaviour:
   - card: {fileID: 599809962}
     correctSlotID: 0
   - card: {fileID: 391186764}
-    correctSlotID: 1
-  - card: {fileID: 579353331}
     correctSlotID: 2
+  - card: {fileID: 579353331}
+    correctSlotID: 1
   - card: {fileID: 8713608}
-    correctSlotID: 3
-  - card: {fileID: 1831490305}
-    correctSlotID: 5
-  - card: {fileID: 1446408626}
     correctSlotID: 6
-  - card: {fileID: 743043445}
+  - card: {fileID: 1831490305}
+    correctSlotID: 3
+  - card: {fileID: 1446408626}
     correctSlotID: 4
+  - card: {fileID: 743043445}
+    correctSlotID: 5
   statusText: {fileID: 1252136672}
 --- !u!1 &1352455010
 GameObject:
@@ -2873,6 +2894,10 @@ PrefabInstance:
     - target: {fileID: 4913054288041311127, guid: 97f921d467933ae45a81c2fc0a74d8b5, type: 3}
       propertyPath: m_Name
       value: PrinceCard (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6281177587965153048, guid: 97f921d467933ae45a81c2fc0a74d8b5, type: 3}
+      propertyPath: currentSlotID
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7999827122721465744, guid: 97f921d467933ae45a81c2fc0a74d8b5, type: 3}
       propertyPath: m_Sprite
@@ -3868,6 +3893,10 @@ PrefabInstance:
     - target: {fileID: 4913054288041311127, guid: 97f921d467933ae45a81c2fc0a74d8b5, type: 3}
       propertyPath: m_Name
       value: PrinceCard (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6281177587965153048, guid: 97f921d467933ae45a81c2fc0a74d8b5, type: 3}
+      propertyPath: currentSlotID
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7999827122721465744, guid: 97f921d467933ae45a81c2fc0a74d8b5, type: 3}
       propertyPath: m_Sprite

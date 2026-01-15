@@ -30,7 +30,7 @@ public class TimelineManager : MonoBehaviour
         if (correctCount == events.Count)
         {
             statusText.text = "Верно! Хронология соблюдена.";
-            statusText.color = Color.green;
+            statusText.color = Color.forestGreen;
         }
         else
         {

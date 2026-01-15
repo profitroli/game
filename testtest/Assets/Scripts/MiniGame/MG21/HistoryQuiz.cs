@@ -44,7 +44,7 @@ public class HistoryQuiz : MonoBehaviour
         if (userChoice == questions[currentIndex].isIndependence)
         {
             resultDisplay.text = "ВЕРНО!";
-            resultDisplay.color = Color.green;
+            resultDisplay.color = Color.forestGreen;
             currentIndex++;
             Invoke("ShowNextQuestion", 0.5f); // Показать следующий вопрос через полсекунды
         }

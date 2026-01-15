@@ -81,7 +81,7 @@ public class OddOneOutManager : MonoBehaviour
         if (correctCount == quizGroups.Count)
         {
             statusText.text = "Верно! Вы нашли всех лишних!";
-            statusText.color = Color.green;
+            statusText.color = Color.forestGreen;
         }
         else
         {

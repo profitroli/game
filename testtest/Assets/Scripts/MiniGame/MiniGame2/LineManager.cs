@@ -149,7 +149,7 @@ public class LineManager : MonoBehaviour
         if (correctCount == totalConnectionsNeeded)
         {
             statusText.text = "Молодец!!Всё правильно!";
-            statusText.color = Color.green;
+            statusText.color = Color.forestGreen;
         }
         else
         {

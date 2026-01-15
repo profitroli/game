@@ -40,9 +40,14 @@ public class CrosswordManager : MonoBehaviour
             }
         }
 
-        resultText.text = (correctWordsCount == words.Count)
-            ? "Победа! Все слова верны."
-            : $"Верно слов: {correctWordsCount} из {words.Count}";
+        if (correctWordsCount == words.Count) {
+            resultText.text = "Победа! Все слова верны.";
+            resultText.color = Color.forestGreen;
+        }
+        else {
+            resultText.text = $"Верно слов: {correctWordsCount} из {words.Count}";
+            resultText.color = Color.red;
+        }
     }
 
     

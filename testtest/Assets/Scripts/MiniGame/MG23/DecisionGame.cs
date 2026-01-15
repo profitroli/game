@@ -47,7 +47,7 @@ public class DecisionGame : MonoBehaviour
         if (wasCorrect)
         {
             infoText.text = "ПРАВИЛЬНО: " + nodes[currentStep].resultInfo;
-            infoText.color = Color.green;
+            infoText.color = Color.forestGreen;
             currentStep++;
             Invoke("ShowNode", 9f); // Даем время прочитать справку
         }

@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
         {
             // Если всё заполнено, показываем результат
             statusText.text = allGood ? "Молодец!!" : "Не правильно, подумай ещё";
-            statusText.color = allGood ? Color.green : Color.red;
+            statusText.color = allGood ? Color.forestGreen : Color.red;
         }
     }
     public void LoadLevelByName(string sceneName)

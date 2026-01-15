@@ -54,9 +54,14 @@ public class RebusManager1 : MonoBehaviour
             }
         }
 
-        statusText.text = (correctCount == questions.Count)
-            ? "Все ребусы разгаданы!"
-            : $"Верно: {correctCount} из {questions.Count}";
+        if (correctCount == questions.Count) { 
+            statusText.text="Все ребусы разгаданы!";
+            statusText.color = Color.forestGreen;
+        }
+        else { 
+            statusText.text= $"Верно: {correctCount} из {questions.Count}";
+            statusText.color = Color.red;
+        }
     }
     public void LoadLevelByName(string sceneName)
     {

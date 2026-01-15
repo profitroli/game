@@ -66,11 +66,13 @@ public class LadderGameManager : MonoBehaviour
             {
                 // Поздравление по итогам лекции
                 statusText.text = "Молодец!Вы идеально изучили эволюцию власти в Беларуси!";
+                statusText.color = Color.forestGreen;
                 if (finishPanel != null) finishPanel.SetActive(true);
             }
             else
             {
                 statusText.text = $"Почти! Правильно: {correctCount} из {slots.Length}. Попробуй поменять красные.";
+                statusText.color = Color.red;
             }
         }
     }

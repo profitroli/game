@@ -25,7 +25,7 @@ public class FamilyTreeManager : MonoBehaviour
         if (correct == familyMembers.Length)
         {
             statusText.text = "Семья воссоединена! Верно.";
-            statusText.color = Color.green;
+            statusText.color = Color.forestGreen;
         }
         else
         {

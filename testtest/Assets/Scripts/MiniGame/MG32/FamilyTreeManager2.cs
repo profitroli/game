@@ -25,7 +25,7 @@ public class FamilyTreeManager2 : MonoBehaviour
         if (correct == familyMembers.Length)
         {
             statusText.text = "Карта востановлена! Верно.";
-            statusText.color = Color.green;
+            statusText.color = Color.forestGreen;
         }
         else
         {
