@@ -6,6 +6,21 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/IntroScene.unity
+    guid: 4f41194d253a4d0408645795c8434791
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 2fe3d6507e2d70c4da5e7431ec9feff0
+  - enabled: 1
+    path: Assets/Scenes/LecturesScene.unity
+    guid: 2672987741257b8479085b2cbaacb086
+  - enabled: 1
+    path: Assets/Scenes/GamesScene.unity
+    guid: 256e4fbbb153a11469dcc1c71cd21b99
+  - enabled: 1
+    path: Assets/Scenes/PreparationScene.unity
+    guid: dd8e9f27929a5bb41a2bb709fb932338
+  - enabled: 1
     path: Assets/Scenes/ContentPage1.unity
     guid: 844815de522c1044da62f5437866ce09
   - enabled: 1
@@ -14,21 +29,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ContentPage3.unity
     guid: 5244ff0acec6b5d4cbca18ac17de6213
-  - enabled: 1
-    path: Assets/Scenes/GamesScene.unity
-    guid: 256e4fbbb153a11469dcc1c71cd21b99
-  - enabled: 1
-    path: Assets/Scenes/IntroScene.unity
-    guid: 4f41194d253a4d0408645795c8434791
-  - enabled: 1
-    path: Assets/Scenes/LecturesScene.unity
-    guid: 2672987741257b8479085b2cbaacb086
-  - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
-    guid: 2fe3d6507e2d70c4da5e7431ec9feff0
-  - enabled: 1
-    path: Assets/Scenes/PreparationScene.unity
-    guid: dd8e9f27929a5bb41a2bb709fb932338
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
