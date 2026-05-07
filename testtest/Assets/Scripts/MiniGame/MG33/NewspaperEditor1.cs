@@ -25,8 +25,7 @@ public class NewspaperEditor1 : MonoBehaviour
 
     void Start()
     {
-        if (publishButton != null) publishButton.interactable = false;
-        if (resultVerdictText != null) resultVerdictText.text = "";
+       
 
         foreach (var s in slots)
         {
